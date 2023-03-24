@@ -7,7 +7,7 @@ public interface IEntityProcessingService {
 
     /**
      *
-     *
+     * @author Jan Corfixen
      *
      * @param gameData
      * @param world

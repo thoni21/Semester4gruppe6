@@ -4,8 +4,8 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 
 /**
+ * @author Jan Corfixen
  *
- * @author jcs
  */
 public interface IPostEntityProcessingService {
 
