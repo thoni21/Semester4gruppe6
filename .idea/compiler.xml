@@ -6,8 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Player" />
+        <module name="Map" />
+        <module name="Weapon" />
         <module name="Common" />
         <module name="Core" />
+        <module name="Enemy" />
       </profile>
     </annotationProcessing>
   </component>
