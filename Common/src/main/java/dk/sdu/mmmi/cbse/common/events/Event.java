@@ -18,4 +18,6 @@ public class Event implements Serializable {
     public Entity getSource() {
         return source;
     }
+
+    //TODO Action: type of event
 }
