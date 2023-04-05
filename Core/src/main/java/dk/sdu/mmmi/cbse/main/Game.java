@@ -52,11 +52,15 @@ public class Game
                 new GameInputProcessor(gameData)
         );
 
+
         // Lookup all Game Plugins using ServiceLoader
         System.out.println(getPluginServices().size());
         for (IGamePluginService iGamePlugin : getPluginServices()) {
             iGamePlugin.start(gameData, world);
+            System.out.println(getPluginServices().size());
         }
+        System.out.println(getPluginServices().size());
+
     }
 
     @Override
@@ -91,7 +95,7 @@ public class Game
             SpritePart spritePart = entity.getPart(SpritePart.class);
             PositionPart positionPart = entity.getPart(PositionPart.class);
 
-            Texture image = new Texture(Gdx.files.internal("Assets/player.png"));
+            Texture image = new Texture(spritePart.getSpritePath());
             Sprite sprite = new Sprite(image, 0, 0, 64, 64);
             sprite.setPosition(positionPart.getX(), positionPart.getY());
             sprite.setSize(256, 256);
