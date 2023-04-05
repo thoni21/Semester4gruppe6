@@ -4,10 +4,15 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.SpritePart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
@@ -23,6 +28,7 @@ public class Game
 
     private static OrthographicCamera cam;
     private ShapeRenderer sr;
+    private SpriteBatch spriteBatch;
 
     private final GameData gameData = new GameData();
     private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
@@ -40,12 +46,14 @@ public class Game
         cam.update();
 
         sr = new ShapeRenderer();
+        spriteBatch = new SpriteBatch();
 
         Gdx.input.setInputProcessor(
                 new GameInputProcessor(gameData)
         );
 
         // Lookup all Game Plugins using ServiceLoader
+        System.out.println(getPluginServices().size());
         for (IGamePluginService iGamePlugin : getPluginServices()) {
             iGamePlugin.start(gameData, world);
         }
@@ -78,23 +86,19 @@ public class Game
     }
 
     private void draw() {
+        // System.out.println(world.getEntities().size());
         for (Entity entity : world.getEntities()) {
+            SpritePart spritePart = entity.getPart(SpritePart.class);
+            PositionPart positionPart = entity.getPart(PositionPart.class);
 
-            sr.setColor(1, 1, 1, 1);
+            Texture image = new Texture(Gdx.files.internal("Assets/player.png"));
+            Sprite sprite = new Sprite(image, 0, 0, 64, 64);
+            sprite.setPosition(positionPart.getX(), positionPart.getY());
+            sprite.setSize(256, 256);
 
-            sr.begin(ShapeRenderer.ShapeType.Line);
-
-            float[] shapex = entity.getShapeX();
-            float[] shapey = entity.getShapeY();
-
-            for (int i = 0, j = shapex.length - 1;
-                    i < shapex.length;
-                    j = i++) {
-
-                sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
-            }
-
-            sr.end();
+            spriteBatch.begin();
+            sprite.draw(spriteBatch);
+            spriteBatch.end();
         }
     }
 

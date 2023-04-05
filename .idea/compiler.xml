@@ -9,10 +9,11 @@
         <module name="Player" />
         <module name="Map" />
         <module name="Weapon" />
+        <module name="Enemy" />
         <module name="Common" />
         <module name="Core" />
-        <module name="Enemy" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="17" />
   </component>
 </project>

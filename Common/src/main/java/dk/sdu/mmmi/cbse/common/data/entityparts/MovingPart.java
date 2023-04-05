@@ -19,14 +19,13 @@ public class MovingPart
 
     private float dx, dy;
     private float deceleration, acceleration;
-    private float maxSpeed, rotationSpeed;
-    private boolean left, right, up;
+    private float maxSpeed;
+    private boolean left, right, up, down;
 
-    public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed) {
+    public MovingPart(float deceleration, float acceleration, float maxSpeed) {
         this.deceleration = deceleration;
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
-        this.rotationSpeed = rotationSpeed;
     }
 
     public float getDx() {
@@ -54,10 +53,6 @@ public class MovingPart
         this.maxSpeed = speed;
     }
 
-    public void setRotationSpeed(float rotationSpeed) {
-        this.rotationSpeed = rotationSpeed;
-    }
-
     public void setLeft(boolean left) {
         this.left = left;
     }
@@ -70,27 +65,27 @@ public class MovingPart
         this.up = up;
     }
 
+    public void setDown(boolean down) { this.down = down; }
+
     @Override
     public void process(GameData gameData, Entity entity) {
         PositionPart positionPart = entity.getPart(PositionPart.class);
         float x = positionPart.getX();
         float y = positionPart.getY();
-        float radians = positionPart.getRadians();
         float dt = gameData.getDelta();
 
         // turning
         if (left) {
-            radians += rotationSpeed * dt;
+            dx -= acceleration * dt;
         }
-
         if (right) {
-            radians -= rotationSpeed * dt;
+            dx += acceleration * dt;
         }
-
-        // accelerating            
         if (up) {
-            dx += cos(radians) * acceleration * dt;
-            dy += sin(radians) * acceleration * dt;
+            dy += acceleration * dt;
+        }
+        if (down) {
+            dy -= acceleration * dt;
         }
 
         // deccelerating
@@ -121,8 +116,6 @@ public class MovingPart
 
         positionPart.setX(x);
         positionPart.setY(y);
-
-        positionPart.setRadians(radians);
     }
 
 }
