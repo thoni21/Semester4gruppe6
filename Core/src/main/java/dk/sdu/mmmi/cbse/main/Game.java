@@ -57,9 +57,7 @@ public class Game
         System.out.println(getPluginServices().size());
         for (IGamePluginService iGamePlugin : getPluginServices()) {
             iGamePlugin.start(gameData, world);
-            System.out.println(getPluginServices().size());
         }
-        System.out.println(getPluginServices().size());
 
     }
 
@@ -90,15 +88,14 @@ public class Game
     }
 
     private void draw() {
-        // System.out.println(world.getEntities().size());
         for (Entity entity : world.getEntities()) {
             SpritePart spritePart = entity.getPart(SpritePart.class);
             PositionPart positionPart = entity.getPart(PositionPart.class);
 
             Texture image = new Texture(spritePart.getSpritePath());
-            Sprite sprite = new Sprite(image, 0, 0, 64, 64);
+            Sprite sprite = new Sprite(image, 0, 0, spritePart.getSrcWidth(), spritePart.getSrcHeight());
             sprite.setPosition(positionPart.getX(), positionPart.getY());
-            sprite.setSize(256, 256);
+            sprite.setSize(gameData.getDisplayWidth()/10, gameData.getDisplayHeight()/10);
 
             spriteBatch.begin();
             sprite.draw(spriteBatch);

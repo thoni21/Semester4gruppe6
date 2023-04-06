@@ -19,7 +19,7 @@ public class PlayerPlugin implements IGamePluginService {
     }
 
     private Entity createPlayer(GameData gameData) {
-        String spritePath = "Assets/player.png";
+        String spritePath = "assets/player.png";
         float deacceleration = 10;
         float acceleration = 60;
         float maxSpeed = 140;
@@ -29,7 +29,7 @@ public class PlayerPlugin implements IGamePluginService {
         Entity player = new Player();
         player.add(new MovingPart(deacceleration, acceleration, maxSpeed));
         player.add(new PositionPart(x, y));
-        player.add(new SpritePart(spritePath));
+        player.add(new SpritePart(spritePath,1327,1322));
 
         return player;
     }
