@@ -2,7 +2,7 @@ package zombie;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 
-public class Enemy extends Entity {
+public class Zombie extends Entity {
 
 }
 

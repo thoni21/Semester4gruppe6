@@ -74,7 +74,7 @@ public class MovingPart
         float y = positionPart.getY();
         float dt = gameData.getDelta();
 
-        // turning
+        // acceleration
         if (left) {
             dx -= acceleration * dt;
         }
@@ -86,17 +86,6 @@ public class MovingPart
         }
         if (down) {
             dy -= acceleration * dt;
-        }
-
-        // deccelerating
-        float vec = (float) sqrt(dx * dx + dy * dy);
-        if (vec > 0) {
-            dx -= (dx / vec) * deceleration * dt;
-            dy -= (dy / vec) * deceleration * dt;
-        }
-        if (vec > maxSpeed) {
-            dx = (dx / vec) * maxSpeed;
-            dy = (dy / vec) * maxSpeed;
         }
 
         // set position
@@ -116,6 +105,17 @@ public class MovingPart
 
         positionPart.setX(x);
         positionPart.setY(y);
+
+        // deccelerating
+        float vec = (float) sqrt(dx * dx + dy * dy);
+        if (vec > 0) {
+            dx -= (dx / vec) * deceleration * dt;
+            dy -= (dy / vec) * deceleration * dt;
+        }
+        if (vec > maxSpeed) {
+            dx = (dx / vec) * maxSpeed;
+            dy = (dy / vec) * maxSpeed;
+        }
     }
 
 }

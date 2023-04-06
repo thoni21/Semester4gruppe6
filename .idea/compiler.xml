@@ -8,8 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Player" />
         <module name="Map" />
+        <module name="Zombie" />
         <module name="Weapon" />
-        <module name="Enemy" />
         <module name="Common" />
         <module name="Core" />
       </profile>

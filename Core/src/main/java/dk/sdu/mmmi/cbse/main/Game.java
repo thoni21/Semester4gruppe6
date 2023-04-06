@@ -27,7 +27,6 @@ public class Game
         implements ApplicationListener {
 
     private static OrthographicCamera cam;
-    private ShapeRenderer sr;
     private SpriteBatch spriteBatch;
 
     private final GameData gameData = new GameData();
@@ -45,7 +44,6 @@ public class Game
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
 
-        sr = new ShapeRenderer();
         spriteBatch = new SpriteBatch();
 
         Gdx.input.setInputProcessor(
@@ -127,7 +125,7 @@ public class Game
         return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
     
-       private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
+    private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
         return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 }
