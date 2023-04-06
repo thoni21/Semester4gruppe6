@@ -95,7 +95,7 @@ public class Game
             Texture image = new Texture(spritePart.getSpritePath());
             Sprite sprite = new Sprite(image, 0, 0, spritePart.getSrcWidth(), spritePart.getSrcHeight());
             sprite.setPosition(positionPart.getX(), positionPart.getY());
-            sprite.setSize(gameData.getDisplayWidth()/10, gameData.getDisplayHeight()/10);
+            sprite.setSize(gameData.getDisplayWidth()/10.0f, gameData.getDisplayHeight()/10.0f);
 
             spriteBatch.begin();
             sprite.draw(spriteBatch);

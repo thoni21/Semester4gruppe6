@@ -5,8 +5,8 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 
 public class SpritePart implements EntityPart {
     private String spritePath;
-    private int srcWidth;
-    private int srcHeight;
+    private final int srcWidth;
+    private final int srcHeight;
 
     public SpritePart (String spritePath, int srcWidth, int srcHeight) {
         this.spritePath = spritePath;
