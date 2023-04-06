@@ -20,8 +20,8 @@ public class PlayerPlugin implements IGamePluginService {
 
     private Entity createPlayer(GameData gameData) {
         String spritePath = "assets/player.png";
-        float deacceleration = 10;
-        float acceleration = 60;
+        float deacceleration = 100;
+        float acceleration = 140;
         float maxSpeed = 140;
         float x = (float) gameData.getDisplayWidth() / 2;
         float y = (float) gameData.getDisplayHeight() / 2;
