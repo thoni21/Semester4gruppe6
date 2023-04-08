@@ -7,13 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Player" />
-        <module name="Map" />
         <module name="Zombie" />
+        <module name="Map" />
         <module name="Weapon" />
         <module name="Common" />
         <module name="Core" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="17" />
+    <bytecodeTargetLevel target="17">
+      <module name="Enemy" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

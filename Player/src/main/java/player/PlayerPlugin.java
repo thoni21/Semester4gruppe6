@@ -29,7 +29,7 @@ public class PlayerPlugin implements IGamePluginService {
         Entity player = new Player();
         player.add(new MovingPart(deacceleration, acceleration, maxSpeed));
         player.add(new PositionPart(x, y));
-        player.add(new SpritePart(spritePath,1327,1322));
+        player.add(new SpritePart(spritePath,1327,1322,gameData.getDisplayHeight()/10.0f, gameData.getDisplayWidth()/10.0f,2));
 
         return player;
     }
