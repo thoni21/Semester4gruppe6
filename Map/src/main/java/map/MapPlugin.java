@@ -21,7 +21,7 @@ public class MapPlugin implements IGamePluginService {
 
         Entity map = new Map();
         map.add(new PositionPart(0,0));
-        map.add(new SpritePart(spritePath,1000,600,gameData.getDisplayHeight(), gameData.getDisplayWidth()));
+        map.add(new SpritePart(spritePath,1000,600,gameData.getDisplayHeight(), gameData.getDisplayWidth(),0));
 
         return map;
     }

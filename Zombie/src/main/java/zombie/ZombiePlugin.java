@@ -26,7 +26,7 @@ public class ZombiePlugin implements IGamePluginService {
         Entity zombie = new Zombie();
         zombie.add(new MovingPart(deacceleration, acceleration, maxSpeed));
         zombie.add(new PositionPart(x, y));
-        zombie.add(new SpritePart(spritePath,256,256, gameData.getDisplayHeight()/10.0f, gameData.getDisplayWidth()/10.0f));
+        zombie.add(new SpritePart(spritePath,256,256, gameData.getDisplayHeight()/10.0f, gameData.getDisplayWidth()/10.0f,1));
 
         return zombie;
     }

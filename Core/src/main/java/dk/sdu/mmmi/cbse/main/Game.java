@@ -86,6 +86,10 @@ public class Game
     }
 
     private void draw() {
+        ArrayList<Sprite> layer0 = new ArrayList<Sprite>();
+        ArrayList<Sprite> layer1 = new ArrayList<Sprite>();
+        ArrayList<Sprite> layer2 = new ArrayList<Sprite>();
+
         for (Entity entity : world.getEntities()) {
             SpritePart spritePart = entity.getPart(SpritePart.class);
             PositionPart positionPart = entity.getPart(PositionPart.class);
@@ -95,10 +99,25 @@ public class Game
             sprite.setPosition(positionPart.getX(), positionPart.getY());
             sprite.setSize(spritePart.getSizeWidth(), spritePart.getSizeHeight());
 
-            spriteBatch.begin();
-            sprite.draw(spriteBatch);
-            spriteBatch.end();
+            if (spritePart.getLayer() == 0){
+                layer0.add(sprite);
+            } else if (spritePart.getLayer() == 1) {
+                layer1.add(sprite);
+            } else {layer2.add(sprite);}
+
         }
+
+        spriteBatch.begin();
+        for(int i = 0; i <= layer0.size()-1;i++){
+            layer0.get(i).draw(spriteBatch);
+        }
+        for(int i = 0; i <= layer1.size()-1;i++){
+            layer1.get(i).draw(spriteBatch);
+        }
+        for(int i = 0; i <= layer2.size()-1;i++){
+            layer2.get(i).draw(spriteBatch);
+        }
+        spriteBatch.end();
     }
 
     @Override
