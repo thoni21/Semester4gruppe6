@@ -86,9 +86,9 @@ public class Game
     }
 
     private void draw() {
-        ArrayList<Sprite> layer0 = new ArrayList<Sprite>();
-        ArrayList<Sprite> layer1 = new ArrayList<Sprite>();
-        ArrayList<Sprite> layer2 = new ArrayList<Sprite>();
+        ArrayList<Sprite> layer0 = new ArrayList<>();
+        ArrayList<Sprite> layer1 = new ArrayList<>();
+        ArrayList<Sprite> layer2 = new ArrayList<>();
 
         for (Entity entity : world.getEntities()) {
             SpritePart spritePart = entity.getPart(SpritePart.class);
