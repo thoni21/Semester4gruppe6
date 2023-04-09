@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Player" />
         <module name="Zombie" />
+        <module name="AI" />
         <module name="Map" />
         <module name="Weapon" />
         <module name="Common" />
