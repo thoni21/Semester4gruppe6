@@ -99,22 +99,22 @@ public class Game
             sprite.setPosition(positionPart.getX(), positionPart.getY());
             sprite.setSize(spritePart.getSizeWidth(), spritePart.getSizeHeight());
 
-            if (spritePart.getLayer() == 0){
+            if (spritePart.getLayer() == 0) {
                 layer0.add(sprite);
             } else if (spritePart.getLayer() == 1) {
                 layer1.add(sprite);
-            } else {layer2.add(sprite);}
+            } else { layer2.add(sprite); }
 
         }
 
         spriteBatch.begin();
-        for(int i = 0; i <= layer0.size()-1;i++){
+        for(int i = 0; i <= layer0.size()-1;i++) {
             layer0.get(i).draw(spriteBatch);
         }
-        for(int i = 0; i <= layer1.size()-1;i++){
+        for(int i = 0; i <= layer1.size()-1;i++) {
             layer1.get(i).draw(spriteBatch);
         }
-        for(int i = 0; i <= layer2.size()-1;i++){
+        for(int i = 0; i <= layer2.size()-1;i++) {
             layer2.get(i).draw(spriteBatch);
         }
         spriteBatch.end();
@@ -134,6 +134,7 @@ public class Game
 
     @Override
     public void dispose() {
+        spriteBatch.dispose();
     }
 
     private Collection<? extends IGamePluginService> getPluginServices() {
