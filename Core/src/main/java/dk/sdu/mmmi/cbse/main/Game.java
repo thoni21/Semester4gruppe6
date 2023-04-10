@@ -4,10 +4,15 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.SpritePart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
@@ -22,7 +27,7 @@ public class Game
         implements ApplicationListener {
 
     private static OrthographicCamera cam;
-    private ShapeRenderer sr;
+    private SpriteBatch spriteBatch;
 
     private final GameData gameData = new GameData();
     private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
@@ -39,16 +44,19 @@ public class Game
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
 
-        sr = new ShapeRenderer();
+        spriteBatch = new SpriteBatch();
 
         Gdx.input.setInputProcessor(
                 new GameInputProcessor(gameData)
         );
 
+
         // Lookup all Game Plugins using ServiceLoader
+        System.out.println(getPluginServices().size());
         for (IGamePluginService iGamePlugin : getPluginServices()) {
             iGamePlugin.start(gameData, world);
         }
+
     }
 
     @Override
@@ -78,24 +86,38 @@ public class Game
     }
 
     private void draw() {
+        ArrayList<Sprite> layer0 = new ArrayList<>();
+        ArrayList<Sprite> layer1 = new ArrayList<>();
+        ArrayList<Sprite> layer2 = new ArrayList<>();
+
         for (Entity entity : world.getEntities()) {
+            SpritePart spritePart = entity.getPart(SpritePart.class);
+            PositionPart positionPart = entity.getPart(PositionPart.class);
 
-            sr.setColor(1, 1, 1, 1);
+            Texture image = new Texture(spritePart.getSpritePath());
+            Sprite sprite = new Sprite(image, 0, 0, spritePart.getSrcWidth(), spritePart.getSrcHeight());
+            sprite.setPosition(positionPart.getX(), positionPart.getY());
+            sprite.setSize(spritePart.getSizeWidth(), spritePart.getSizeHeight());
 
-            sr.begin(ShapeRenderer.ShapeType.Line);
+            if (spritePart.getLayer() == 0){
+                layer0.add(sprite);
+            } else if (spritePart.getLayer() == 1) {
+                layer1.add(sprite);
+            } else {layer2.add(sprite);}
 
-            float[] shapex = entity.getShapeX();
-            float[] shapey = entity.getShapeY();
-
-            for (int i = 0, j = shapex.length - 1;
-                    i < shapex.length;
-                    j = i++) {
-
-                sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
-            }
-
-            sr.end();
         }
+
+        spriteBatch.begin();
+        for(int i = 0; i <= layer0.size()-1;i++){
+            layer0.get(i).draw(spriteBatch);
+        }
+        for(int i = 0; i <= layer1.size()-1;i++){
+            layer1.get(i).draw(spriteBatch);
+        }
+        for(int i = 0; i <= layer2.size()-1;i++){
+            layer2.get(i).draw(spriteBatch);
+        }
+        spriteBatch.end();
     }
 
     @Override
@@ -122,7 +144,7 @@ public class Game
         return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
     
-       private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
+    private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
         return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 }

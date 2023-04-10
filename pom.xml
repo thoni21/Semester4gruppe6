@@ -15,8 +15,9 @@
         <module>Common</module>
         <module>Player</module>
         <module>Map</module>
-        <module>Enemy</module>
+        <module>Zombie</module>
         <module>Weapon</module>
+        <module>AI</module>
 
     </modules>
     <properties>
