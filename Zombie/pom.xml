@@ -7,9 +7,6 @@
         <groupId>dk.sdu.mmmi.cbse</groupId>
         <version>1.0.1-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>Map</artifactId>
     <dependencies>
         <dependency>
             <groupId>dk.sdu.mmmi.cbse</groupId>
@@ -17,7 +14,16 @@
             <version>1.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>dk.sdu.mmmi.cbse</groupId>
+            <artifactId>AI</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>Zombie</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

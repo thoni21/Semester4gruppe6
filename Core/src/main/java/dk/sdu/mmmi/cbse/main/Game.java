@@ -27,7 +27,6 @@ public class Game
         implements ApplicationListener {
 
     private static OrthographicCamera cam;
-    private ShapeRenderer sr;
     private SpriteBatch spriteBatch;
 
     private final GameData gameData = new GameData();
@@ -45,7 +44,6 @@ public class Game
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
 
-        sr = new ShapeRenderer();
         spriteBatch = new SpriteBatch();
 
         Gdx.input.setInputProcessor(
@@ -88,6 +86,10 @@ public class Game
     }
 
     private void draw() {
+        ArrayList<Sprite> layer0 = new ArrayList<>();
+        ArrayList<Sprite> layer1 = new ArrayList<>();
+        ArrayList<Sprite> layer2 = new ArrayList<>();
+
         for (Entity entity : world.getEntities()) {
             SpritePart spritePart = entity.getPart(SpritePart.class);
             PositionPart positionPart = entity.getPart(PositionPart.class);
@@ -95,12 +97,27 @@ public class Game
             Texture image = new Texture(spritePart.getSpritePath());
             Sprite sprite = new Sprite(image, 0, 0, spritePart.getSrcWidth(), spritePart.getSrcHeight());
             sprite.setPosition(positionPart.getX(), positionPart.getY());
-            sprite.setSize(gameData.getDisplayWidth()/10.0f, gameData.getDisplayHeight()/10.0f);
+            sprite.setSize(spritePart.getSizeWidth(), spritePart.getSizeHeight());
 
-            spriteBatch.begin();
-            sprite.draw(spriteBatch);
-            spriteBatch.end();
+            if (spritePart.getLayer() == 0){
+                layer0.add(sprite);
+            } else if (spritePart.getLayer() == 1) {
+                layer1.add(sprite);
+            } else {layer2.add(sprite);}
+
         }
+
+        spriteBatch.begin();
+        for(int i = 0; i <= layer0.size()-1;i++){
+            layer0.get(i).draw(spriteBatch);
+        }
+        for(int i = 0; i <= layer1.size()-1;i++){
+            layer1.get(i).draw(spriteBatch);
+        }
+        for(int i = 0; i <= layer2.size()-1;i++){
+            layer2.get(i).draw(spriteBatch);
+        }
+        spriteBatch.end();
     }
 
     @Override
@@ -127,7 +144,7 @@ public class Game
         return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
     
-       private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
+    private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
         return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 }
