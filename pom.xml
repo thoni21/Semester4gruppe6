@@ -18,6 +18,7 @@
         <module>Zombie</module>
         <module>Weapon</module>
         <module>AI</module>
+        <module>Collision</module>
 
     </modules>
     <properties>
