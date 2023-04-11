@@ -28,7 +28,6 @@ public class Game
 
     private static OrthographicCamera cam;
     private SpriteBatch spriteBatch;
-
     private final GameData gameData = new GameData();
     private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
     private List<IPostEntityProcessingService> postEntityProcessors = new ArrayList<>();
