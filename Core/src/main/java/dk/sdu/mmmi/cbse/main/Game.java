@@ -104,7 +104,6 @@ public class Game
             } else if (spritePart.getLayer() == 1) {
                 layer1.add(sprite);
             } else {layer2.add(sprite);}
-
         }
 
         spriteBatch.begin();
