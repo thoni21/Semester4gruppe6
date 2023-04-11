@@ -16,9 +16,9 @@ public class ZombiePlugin implements IGamePluginService {
         world.addEntity(zombie);
     }
     private Entity createEnemy(GameData gameData){
-        int spriteStartPosX = 44; // Sprite start position X in sprite sheet
+        int spriteStartPosX = 32; // Sprite start position X in sprite sheet
         int spriteStartPosY = 600; // Sprite start position Y in sprite sheet
-        int spriteWidth = 44;     // Sprite width in sprite sheet
+        int spriteWidth = 32;     // Sprite width in sprite sheet
         int spriteHeight = 44;    // Sprite height in sprite sheet
         int spriteLayer = 2;     // TODO: maybe convert layers to an enum
         float deacceleration = 100;
@@ -30,8 +30,8 @@ public class ZombiePlugin implements IGamePluginService {
         Entity zombie = new Zombie();
         zombie.add(new MovingPart(deacceleration, acceleration, maxSpeed));
         zombie.add(new PositionPart(x, y));
-        zombie.add(new SpritePart(spriteStartPosX, spriteStartPosY, spriteWidth,spriteHeight,gameData.getDisplayHeight()/10.0f, gameData.getDisplayWidth()/10.0f, spriteLayer));
-
+        //zombie.add(new SpritePart(spriteStartPosX, spriteStartPosY, spriteWidth,spriteHeight,gameData.getDisplayHeight()/10.0f, gameData.getDisplayWidth()/10.0f, spriteLayer));
+        zombie.add(new SpritePart(spriteStartPosX, spriteStartPosY, spriteWidth,spriteHeight,spriteHeight, spriteWidth, spriteLayer));
         return zombie;
     }
     @Override
