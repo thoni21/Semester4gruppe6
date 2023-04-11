@@ -3,6 +3,8 @@ package dk.sdu.mmmi.cbse.common.data.entityparts;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 
+
+
 public class SpritePart implements EntityPart {
     private String spritePath;
     private final int srcWidth;
@@ -10,6 +12,9 @@ public class SpritePart implements EntityPart {
     private int layer;
     private float sizeWidth;
     private float sizeHeight;
+
+
+
 
 
     public SpritePart (String spritePath, int srcWidth, int srcHeight,float sizeHeight,float sizeWidth, int layer) {
