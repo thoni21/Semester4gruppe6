@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -27,8 +27,8 @@ public class Game
         implements ApplicationListener {
 
     private static OrthographicCamera cam;
-    private SpriteBatch spriteBatch;
-
+    private SpriteBatch batch;
+    private Texture spriteSheetTexture;
     private final GameData gameData = new GameData();
     private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
     private List<IPostEntityProcessingService> postEntityProcessors = new ArrayList<>();
@@ -44,7 +44,10 @@ public class Game
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
 
-        spriteBatch = new SpriteBatch();
+        batch = new SpriteBatch();
+
+        // Load Sprite Sheet
+        this.spriteSheetTexture = new Texture("assets/spritesheet.png");
 
         Gdx.input.setInputProcessor(
                 new GameInputProcessor(gameData)
@@ -86,38 +89,42 @@ public class Game
     }
 
     private void draw() {
-        ArrayList<Sprite> layer0 = new ArrayList<>();
-        ArrayList<Sprite> layer1 = new ArrayList<>();
-        ArrayList<Sprite> layer2 = new ArrayList<>();
+        ArrayList<Entity> layer0 = new ArrayList<>();
+        ArrayList<Entity> layer1 = new ArrayList<>();
+        ArrayList<Entity> layer2 = new ArrayList<>();
 
+        // Get all entities in the world and add them to drawing layers
         for (Entity entity : world.getEntities()) {
             SpritePart spritePart = entity.getPart(SpritePart.class);
-            PositionPart positionPart = entity.getPart(PositionPart.class);
-
-            Texture image = new Texture(spritePart.getSpritePath());
-            Sprite sprite = new Sprite(image, 0, 0, spritePart.getSrcWidth(), spritePart.getSrcHeight());
-            sprite.setPosition(positionPart.getX(), positionPart.getY());
-            sprite.setSize(spritePart.getSizeWidth(), spritePart.getSizeHeight());
-
             if (spritePart.getLayer() == 0) {
-                layer0.add(sprite);
+                layer0.add(entity);
             } else if (spritePart.getLayer() == 1) {
-                layer1.add(sprite);
-            } else { layer2.add(sprite); }
-
+                layer1.add(entity);
+            } else { layer2.add(entity); }
         }
 
-        spriteBatch.begin();
-        for(int i = 0; i <= layer0.size()-1;i++) {
-            layer0.get(i).draw(spriteBatch);
+        // Begin drawing batch.
+        // For each layer draw the entity from the Sprite Sheet.
+        batch.begin();
+        for (Entity entity : layer0) {
+            drawEntity(entity);
         }
-        for(int i = 0; i <= layer1.size()-1;i++) {
-            layer1.get(i).draw(spriteBatch);
+        for (Entity entity : layer1) {
+            drawEntity(entity);
         }
-        for(int i = 0; i <= layer2.size()-1;i++) {
-            layer2.get(i).draw(spriteBatch);
+        for (Entity entity : layer2) {
+            drawEntity(entity);
         }
-        spriteBatch.end();
+        batch.end();
+    }
+
+    private void drawEntity(Entity entity) {
+        SpritePart spritePart = entity.getPart(SpritePart.class);
+        PositionPart positionPart = entity.getPart(PositionPart.class);
+
+        TextureRegion region = new TextureRegion(spriteSheetTexture, spritePart.getSrcStartPosX(), spritePart.getSrcStartPosY(), spritePart.getSrcWidth(), spritePart.getSrcHeight());
+
+        batch.draw(region, positionPart.getX(), positionPart.getY());
     }
 
     @Override
@@ -134,7 +141,8 @@ public class Game
 
     @Override
     public void dispose() {
-        spriteBatch.dispose();
+        batch.dispose();
+        spriteSheetTexture.dispose();
     }
 
     private Collection<? extends IGamePluginService> getPluginServices() {
