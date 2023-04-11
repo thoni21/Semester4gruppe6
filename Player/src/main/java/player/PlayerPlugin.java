@@ -19,7 +19,11 @@ public class PlayerPlugin implements IGamePluginService {
     }
 
     private Entity createPlayer(GameData gameData) {
-        String spritePath = "assets/player.png";
+        int spriteStartPosX = 0; // Sprite start position X in sprite sheet
+        int spriteStartPosY = 600; // Sprite start position Y in sprite sheet
+        int spriteWidth = 44;     // Sprite width in sprite sheet
+        int spriteHeight = 44;    // Sprite height in sprite sheet
+        int spriteLayer = 2;     // TODO: maybe convert layers to an enum
         float deacceleration = 100;
         float acceleration = 140;
         float maxSpeed = 140;
@@ -29,7 +33,7 @@ public class PlayerPlugin implements IGamePluginService {
         Entity player = new Player();
         player.add(new MovingPart(deacceleration, acceleration, maxSpeed));
         player.add(new PositionPart(x, y));
-        player.add(new SpritePart(spritePath,44,44,gameData.getDisplayHeight()/10.0f, gameData.getDisplayWidth()/10.0f,2));
+        player.add(new SpritePart(spriteStartPosX, spriteStartPosY, spriteWidth,spriteHeight,gameData.getDisplayHeight()/10.0f, gameData.getDisplayWidth()/10.0f, spriteLayer));
 
         return player;
     }
