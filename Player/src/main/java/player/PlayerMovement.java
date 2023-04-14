@@ -12,7 +12,7 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.*;
 
 
-public class PlayerMovement implements IEntityProcessingService{
+public class PlayerMovement implements IEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {
         for (Entity player : world.getEntities(Player.class)) {

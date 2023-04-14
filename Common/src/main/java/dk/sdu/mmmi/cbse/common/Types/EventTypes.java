@@ -1,5 +1,8 @@
 package dk.sdu.mmmi.cbse.common.Types;
 
-public class EventTypes {
+public enum EventTypes {
     //TODO Collision event, CollidedWith
+    collision,
+    spawn,
+    death
 }

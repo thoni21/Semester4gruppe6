@@ -1,5 +1,6 @@
 package player;
 
+import dk.sdu.mmmi.cbse.common.Types.EntityTypes;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -19,6 +20,7 @@ public class PlayerPlugin implements IGamePluginService {
     }
 
     private Entity createPlayer(GameData gameData) {
+        EntityTypes entityType = EntityTypes.Player;
         int spriteStartPosX = 0; // Sprite start position X in sprite sheet
         int spriteStartPosY = 600; // Sprite start position Y in sprite sheet
         int spriteWidth = 32;     // Sprite width in sprite sheet
