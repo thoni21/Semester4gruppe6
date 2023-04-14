@@ -7,6 +7,7 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SpritePart;
+import player.Player;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -57,7 +58,7 @@ public class CollisionDetection implements IEntityProcessingService{
         float dx = ent.getX() - colEnt.getX();
         float dy = ent.getY() - colEnt.getY();
         float distance = (float) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-        Gdx.app.log("Distance", distance + "");
+        // Gdx.app.log("Distance", distance + "");
         if (distance > 200) {
             return false;
         }
