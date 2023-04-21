@@ -5,6 +5,6 @@ module Weapon {
     exports weapon;
     requires Common;
 
-    provides IGamePluginService with weaponzombie.ZombiePlugin;
-    provides IEntityProcessingService with zombie.ZombieControlSystem;
+    provides IGamePluginService with weapon.WeaponPlugin;
+    provides IEntityProcessingService with weapon.WeaponProcessing;
 }
