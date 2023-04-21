@@ -40,13 +40,12 @@ public class LifePart implements EntityPart {
     @Override
     public void process(GameData gameData, Entity entity) {
         //TODO: If entity is hit minus damage.
-        if (isHit) {
-            life = - 1;
-            isHit = false;
+        if (this.isHit) {
+            this.life = - 1;
+            this.isHit = false;
         }
-        if (life <= 0) {
-            dead = true;
+        if (this.life <= 0) {
+            this.dead = true;
         }
-
     }
 }
