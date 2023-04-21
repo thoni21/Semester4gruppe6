@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.cbse;
 
+import com.badlogic.gdx.Gdx;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -10,6 +11,8 @@ import player.Player;
 import zombie.Zombie;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
+
 
 public class CollisionDetection implements IEntityProcessingService{
 
@@ -53,7 +56,8 @@ public class CollisionDetection implements IEntityProcessingService{
             SpritePart ent = entity.getPart(SpritePart.class);
             for (Entity colEntity : world.getEntities(Zombie.class)){
                 if (collideWith(entity, colEntity)) {
-                    world.removeEntity(colEntity);
+                    //world.removeEntity(colEntity);
+                    Gdx.app.log("Collision", "");
                 }
             }
         }
@@ -71,6 +75,8 @@ public class CollisionDetection implements IEntityProcessingService{
         // of the SpritePart
         Rectangle hitBoxEnt = new Rectangle((int) ent.getX(),(int) ent.getY(), (int) entSprite.getSizeWidth(), (int) entSprite.getSizeHeight());
         Rectangle hitBoxColEnt = new Rectangle((int) colEnt.getX(),(int) colEnt.getY(), (int) colEntSprite.getSizeWidth(), (int) colEntSprite.getSizeHeight());
+
+
 
         // return based on if they overlap or not, true if they do, false if not
         return hitBoxEnt.intersects(hitBoxColEnt);
