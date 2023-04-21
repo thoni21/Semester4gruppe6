@@ -16,7 +16,7 @@ public class CollisionEvent extends Event {
         // Gdx.app.log("Take damage", super.getSource().getID());
         if (super.getSource().getType() == EntityTypes.Player && this.colEntity.getType() == EntityTypes.Enemy) {
             // The player has collided with an enemy.
-            // TODO: Kill/Take damage from the player
+            // TODO: Kill/Take damage from the player an enemy - Make sure they don't overlap.
             LifePart sourceLifePart = super.getSource().getPart(LifePart.class);
             sourceLifePart.setIsHit(true);
         }
