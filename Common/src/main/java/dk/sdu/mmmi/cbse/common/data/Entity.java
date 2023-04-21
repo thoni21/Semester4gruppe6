@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.cbse.common.data;
 
+import dk.sdu.mmmi.cbse.common.Types.EntityTypes;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import java.io.Serializable;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Entity implements Serializable {
 
     private final UUID ID = UUID.randomUUID();
+    private EntityTypes type;
     private Map<Class, EntityPart> parts;
 
     public Entity() {
@@ -29,5 +31,13 @@ public class Entity implements Serializable {
 
     public String getID() {
         return ID.toString();
+    }
+
+    public void setType(EntityTypes type) {
+        this.type = type;
+    }
+
+    public EntityTypes getType() {
+        return type;
     }
 }
