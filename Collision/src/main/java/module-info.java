@@ -7,8 +7,7 @@ module Collision {
     requires com.badlogic.gdx;
     requires java.datatransfer;
     requires java.desktop;
-    requires Player;
-    requires Enemy;
+
 
     provides  IEntityProcessingService with CollisionDetection;
 }
