@@ -6,6 +6,12 @@
         <artifactId>asteroids.jpms</artifactId>
         <version>1.0.1-SNAPSHOT</version>
     </parent>
+    <dependencies>
+        <dependency>
+            <groupId>dk.sdu.mmmi.cbse</groupId>
+            <artifactId>shadedlibgdx</artifactId>
+        </dependency>
+    </dependencies>
     <artifactId>Common</artifactId>
     <packaging>jar</packaging>
     <name>Common</name>

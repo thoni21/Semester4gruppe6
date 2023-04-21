@@ -1,28 +1,28 @@
 package dk.sdu.mmmi.cbse.common.events;
 
-import dk.sdu.mmmi.cbse.common.Types.EventTypes;
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.services.IEventExecuteService;
+
 import java.io.Serializable;
 
 /**
  *
  * @author Mads
  */
-public class Event implements Serializable {
+public class Event implements Serializable, IEventExecuteService {
 
     private final Entity source;
-    private EventTypes type;
 
-    public Event(Entity source, EventTypes type) {
+    public Event(Entity source) {
         this.source = source;
-        this.type = type;
     }
 
     public Entity getSource() {
         return source;
     }
 
-    public void setType(EventTypes type) { this.type = type; }
+    @Override
+    public void executeEvent() {
 
-    public EventTypes getType() { return this.type; }
+    }
 }
