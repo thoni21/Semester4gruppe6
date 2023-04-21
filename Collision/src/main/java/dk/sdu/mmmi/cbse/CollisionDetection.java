@@ -7,8 +7,6 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SpritePart;
-import player.Player;
-
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
