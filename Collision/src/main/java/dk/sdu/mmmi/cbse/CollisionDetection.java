@@ -4,15 +4,19 @@ import com.badlogic.gdx.Gdx;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
-import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SpritePart;
+import dk.sdu.mmmi.cbse.common.events.CollisionEvent;
+import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 
 
 public class CollisionDetection implements IEntityProcessingService{
+    private boolean isCollided = false;
 
     @Override
     public void process(GameData gameData, World world){
@@ -37,9 +41,11 @@ public class CollisionDetection implements IEntityProcessingService{
            Finds all players and zombies in entities check if they overlap
         */
         for (Entity entity : world.getEntities()){
+            isCollided = false;
             for (Entity colEntity : world.getEntities()){
-                if (collideWith(entity, colEntity) && !entity.equals(colEntity)) {
-                    //world.removeEntity(colEntity);
+                if (collideWith(entity, colEntity) && !entity.equals(colEntity) && isCollided != true) {
+                    isCollided = true;
+                    gameData.addEvent(new CollisionEvent(entity, colEntity));
                     Gdx.app.log("Collision", entity.getID() + " with " + colEntity.getID());
                 }
             }
@@ -50,6 +56,9 @@ public class CollisionDetection implements IEntityProcessingService{
     private Boolean collideWith(Entity entity, Entity collisionEntity) {
         PositionPart ent = entity.getPart(PositionPart.class);
         PositionPart colEnt = collisionEntity.getPart(PositionPart.class);
+
+        LifePart lifePart = entity.getPart(LifePart.class);
+        Gdx.app.log("Player Health", lifePart.getLife() + "");
 
         // Check to see what the distance is between the two entities.
         // Return if the distance is to long to collide.

@@ -7,7 +7,6 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
 public class ZombieControlSystem implements IEntityProcessingService {
-
     @Override
     public void process(GameData gameData, World world) {
         for (Entity zombie : world.getEntities(Zombie.class)) {
