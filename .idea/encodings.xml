@@ -11,6 +11,10 @@
     <file url="file://$PROJECT_DIR$/Core/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Enemy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Enemy/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/HellFlameAura/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/HellFlameAura/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/InfernoAuraBullet/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/InfernoAuraBullet/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Map/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Map/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Player/src/main/java" charset="UTF-8" />

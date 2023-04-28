@@ -1,0 +1,3 @@
+module CommonBullet {
+    requires Common;
+}
