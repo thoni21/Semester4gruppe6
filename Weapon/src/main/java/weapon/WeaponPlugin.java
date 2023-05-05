@@ -28,12 +28,11 @@ public class WeaponPlugin implements IGamePluginService {
         int spriteHeight = 16; // Sprite height in sprite sheet
         int spriteLayer = 2; // TODO: maybe convert layers to an enum
 
-        // Movement attributes
+        // Position attributes
         float x = Float.MAX_VALUE; // Any other way to spawn weapon, perhaps on player? How does one get access to player and player attributes?
         float y = Float.MAX_VALUE; // Any other way to spawn weapon, perhaps on player? How does one get access to player and player attributes?
 
         Entity weapon = new Weapon();
-        // weapon.setType(EntityTypes.defaultWeapon); // Add weapon types
         weapon.add(new PositionPart(x, y));
         weapon.add(new SpritePart(spriteStartPosX, spriteStartPosY, spriteWidth, spriteHeight, spriteWidth, spriteHeight, spriteLayer));
 

@@ -6,7 +6,6 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
-import dk.sdu.mmmi.commonbullet.Bullet;
 import dk.sdu.mmmi.commonbullet.BulletSPI;
 
 public class InfernoAuraProcess implements IEntityProcessingService, BulletSPI {
@@ -65,15 +64,9 @@ public class InfernoAuraProcess implements IEntityProcessingService, BulletSPI {
         infernoAura.add(new SpritePart(
             spriteStartPosX, spriteStartPosY, spriteWidth, spriteHeight, spriteWidth, spriteHeight, spriteLayer
         ));
-        infernoAura.add(new PositionPart(
-                weaponPosition.getX(), weaponPosition.getY()
-        ));
-        infernoAura.add(new TimerPart(
-                10
-        ));
-        infernoAura.add(new LifePart(
-                1
-        ));
+        infernoAura.add(new PositionPart(weaponPosition.getX(), weaponPosition.getY()));
+        infernoAura.add(new TimerPart(10));
+        infernoAura.add(new LifePart(1));
         infernoAura.add(new DamagePart(2));
 
         infernoAura.setType(EntityTypes.Aura);
