@@ -1,5 +1,6 @@
 package player;
 
+import com.badlogic.gdx.Gdx;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -28,6 +29,8 @@ public class PlayerMovement implements IEntityProcessingService {
             movingPart.setRight(gameData.getKeys().isDown(RIGHT));
             movingPart.setUp(gameData.getKeys().isDown(UP));
             movingPart.setDown(gameData.getKeys().isDown(DOWN));
+
+            // Gdx.app.log("Player health",lifePart.getLife() + "");
 
             movingPart.process(gameData, player);
             positionPart.process(gameData, player);

@@ -4,10 +4,7 @@ import dk.sdu.mmmi.cbse.common.Types.EntityTypes;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.SpritePart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.TimerPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.commonbullet.Bullet;
 import dk.sdu.mmmi.commonbullet.BulletSPI;
@@ -44,16 +41,13 @@ public class InfernoAuraProcess implements IEntityProcessingService, BulletSPI {
                     break;
                 }
             }
+
+            TimerPart timerPart = infernoAura.getPart(TimerPart.class);
+            timerPart.process(gameData, infernoAura);
+            lifePart.process(gameData, infernoAura);
+
             break;
         }
-    }
-
-    private double calculateDistance(Entity player, Entity enemy) {
-        PositionPart playerPosition = player.getPart(PositionPart.class);
-        PositionPart enemyPosition = enemy.getPart(PositionPart.class);
-
-        return Math.sqrt(Math.pow(playerPosition.getX() - enemyPosition.getX(), 2)
-                + Math.pow(playerPosition.getY() - enemyPosition.getY(), 2));
     }
 
     @Override
@@ -80,6 +74,7 @@ public class InfernoAuraProcess implements IEntityProcessingService, BulletSPI {
         infernoAura.add(new LifePart(
                 1
         ));
+        infernoAura.add(new DamagePart(2));
 
         infernoAura.setType(EntityTypes.Aura);
 

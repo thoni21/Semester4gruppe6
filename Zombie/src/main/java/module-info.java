@@ -5,6 +5,7 @@ module Enemy {
     exports zombie;
     requires Common;
     requires AI;
+    requires com.badlogic.gdx;
 
     provides IGamePluginService with zombie.ZombiePlugin;
     provides IEntityProcessingService with zombie.ZombieControlSystem;

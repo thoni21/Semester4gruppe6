@@ -1,4 +1,5 @@
-import dk.sdu.mmmi.cbse.CollisionDetection;
+import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
+import dk.sdu.mmmi.collision.CollisionDetection;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
 
@@ -9,5 +10,5 @@ module Collision {
     requires java.desktop;
 
 
-    provides  IEntityProcessingService with CollisionDetection;
+    provides IPostEntityProcessingService with CollisionDetection;
 }

@@ -36,7 +36,7 @@ public class PlayerPlugin implements IGamePluginService {
         float y = (float) gameData.getDisplayHeight() / 2;
 
         // Health attributes
-        int health = 20;
+        int health = 10;
 
         Entity player = new Player();
         player.setType(EntityTypes.Player);
