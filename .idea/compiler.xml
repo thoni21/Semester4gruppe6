@@ -20,6 +20,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="17">
+      <module name="AiRandom" target="17" />
+      <module name="CommonAI" target="17" />
       <module name="Enemy" target="17" />
       <module name="InfernoAuraBullet" target="17" />
     </bytecodeTargetLevel>
