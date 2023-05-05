@@ -19,6 +19,8 @@
         <module>Weapon</module>
         <module>AI</module>
         <module>Collision</module>
+        <module>CommonBullet</module>
+        <module>InfernoAura</module>
 
     </modules>
     <properties>

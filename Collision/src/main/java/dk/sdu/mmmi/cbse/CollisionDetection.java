@@ -46,7 +46,7 @@ public class CollisionDetection implements IEntityProcessingService{
                 if (collideWith(entity, colEntity) && !entity.equals(colEntity) && isCollided != true) {
                     isCollided = true;
                     gameData.addEvent(new CollisionEvent(entity, colEntity));
-                    Gdx.app.log("Collision", entity.getID() + " with " + colEntity.getID());
+                    // Gdx.app.log("Collision", entity.getID() + " with " + colEntity.getID());
                 }
             }
         }
@@ -57,8 +57,6 @@ public class CollisionDetection implements IEntityProcessingService{
         PositionPart ent = entity.getPart(PositionPart.class);
         PositionPart colEnt = collisionEntity.getPart(PositionPart.class);
 
-        LifePart lifePart = entity.getPart(LifePart.class);
-        Gdx.app.log("Player Health", lifePart.getLife() + "");
 
         // Check to see what the distance is between the two entities.
         // Return if the distance is to long to collide.

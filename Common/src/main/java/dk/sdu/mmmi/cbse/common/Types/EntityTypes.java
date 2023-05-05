@@ -4,5 +4,8 @@ public enum EntityTypes {
     Enemy,
     Player,
     Bullet,
+
+    /* Auras */
+    Aura,
     Obstacle
 }
