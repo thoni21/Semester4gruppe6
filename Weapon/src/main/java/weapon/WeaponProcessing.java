@@ -1,54 +1,73 @@
 package weapon;
 
+import com.badlogic.gdx.Gdx;
 import dk.sdu.mmmi.cbse.common.Types.EntityTypes;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.SpritePart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
-import java.util.ArrayList;
+import dk.sdu.mmmi.commonbullet.BulletSPI;
 
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.*;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.DOWN;
+import java.util.Collection;
+import java.util.ServiceLoader;
+
+import static java.util.stream.Collectors.toList;
 
 public class WeaponProcessing implements IEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {
         // Find player entity.
-        Entity player = null;
+
+        Entity weaponEntity = null;
+        for (Entity weapon : world.getEntities(Weapon.class)) {
+            weaponEntity = weapon;
+
+            for (Entity entity : world.getEntities()) {
+                if (entity.getType() == EntityTypes.Player) {
+                    Entity player = entity;
+
+                    // Position.
+                    PositionPart playerPositionPart = player.getPart(PositionPart.class);
+                    PositionPart weaponPositionPart = weapon.getPart(PositionPart.class);
+
+                    // Sprite.
+                    SpritePart playerSpritePart = player.getPart(SpritePart.class);
+                    SpritePart weaponSpritePart = weapon.getPart(SpritePart.class);
+
+                    weaponPositionPart.setX(playerPositionPart.getX() -
+                            playerSpritePart.getSrcWidth() / 2f);
+                    weaponPositionPart.setY(playerPositionPart.getY() +
+                            playerSpritePart.getSrcHeight() / 2f + weaponSpritePart.getSrcHeight() / 2f);
+
+                    break;
+                }
+            }
+
+            break;
+        }
+
+        Entity aura = null;
         for (Entity entity : world.getEntities()) {
-            if (entity.getType() == EntityTypes.Player) {
-                player = entity;
+            if (entity.getType() == EntityTypes.Aura) {
+                aura = entity;
                 break;
             }
         }
 
-        // Find closest enemy.
-        /*
-        Entity closestEnemy = null;
-        for (Entity entity : world.getEntities()) {
-            if ((entity.getType() == EntityTypes.Enemy && closestEnemy != null)
-            && calculateDistance(player, closestEnemy) > calculateDistance(player, entity)) {
-                closestEnemy = entity;
-            } else {
-                closestEnemy = entity;
+        if (aura == null && weaponEntity != null) {
+            Gdx.app.log("Test", "" + getBulletSPIs().size());
+            for (BulletSPI bullet : getBulletSPIs()) {
+                world.addEntity(bullet.createBullet(weaponEntity, gameData));
+                Gdx.app.log("Test", "Bullet fired");
             }
         }
-        */
+    }
 
-        // Find enemies within range (aura weapon).
-        ArrayList<Entity> enemiesInRange = new ArrayList<>();
-        for (Entity entity : world.getEntities()) {
-            if (entity.getType() == EntityTypes.Enemy
-                    && calculateDistance(player, entity) < 500) {
-                enemiesInRange.add(entity);
-            }
-        }
+    private Collection<? extends BulletSPI> getBulletSPIs() {
 
-        for (Entity entity : enemiesInRange) {
-            // gameData.addEvent();
-        }
+        return ServiceLoader.load(BulletSPI.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 
     private double calculateDistance(Entity player, Entity enemy) {

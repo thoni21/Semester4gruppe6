@@ -21,12 +21,12 @@ public class WeaponPlugin implements IGamePluginService {
 
     private Entity createEnemy(GameData gameData){
 
-        // Sprite attributes
-        // int spriteStartPosX = 32; -- Sprite start position X in sprite sheet
-        // int spriteStartPosY = 600; -- // Sprite start position Y in sprite sheet
-        // int spriteWidth = 32;  --   // Sprite width in sprite sheet
-        // int spriteHeight = 44;  --  // Sprite height in sprite sheet
-        // int spriteLayer = 2;  --   // TODO: maybe convert layers to an enum
+         // Sprite attributes.
+        int spriteStartPosX = 0; // Sprite start position X in sprite sheet
+        int spriteStartPosY = 644; // Sprite start position Y in sprite sheet
+        int spriteWidth = 16; // Sprite width in sprite sheet
+        int spriteHeight = 16; // Sprite height in sprite sheet
+        int spriteLayer = 2; // TODO: maybe convert layers to an enum
 
         // Movement attributes
         float x = Float.MAX_VALUE; // Any other way to spawn weapon, perhaps on player? How does one get access to player and player attributes?
@@ -35,7 +35,7 @@ public class WeaponPlugin implements IGamePluginService {
         Entity weapon = new Weapon();
         // weapon.setType(EntityTypes.defaultWeapon); // Add weapon types
         weapon.add(new PositionPart(x, y));
-        // weapon.add(new SpritePart(spriteStartPosX, spriteStartPosY, spriteWidth,spriteHeight,spriteHeight, spriteWidth, spriteLayer));
+        weapon.add(new SpritePart(spriteStartPosX, spriteStartPosY, spriteWidth, spriteHeight, spriteWidth, spriteHeight, spriteLayer));
 
         return weapon;
     }
