@@ -15,15 +15,22 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 public class TimerPart
         implements EntityPart {
 
+    // The current expiration time left.
     private float expiration;
+
+    // The initial expiration time.
+    private float expirationTotal;
 
     public TimerPart(float expiration) {
         this.expiration = expiration;
+        this.expirationTotal = expiration;
     }
 
     public float getExpiration() {
         return expiration;
     }
+
+    public float getExpirationTotal() { return expirationTotal; }
 
     public void setExpiration(float expiration) {
         this.expiration = expiration;
@@ -42,7 +49,6 @@ public class TimerPart
         if (expiration <= 0) {
             LifePart lifePart = entity.getPart(LifePart.class);
             lifePart.setLife(0);
-
         }
     }
 
