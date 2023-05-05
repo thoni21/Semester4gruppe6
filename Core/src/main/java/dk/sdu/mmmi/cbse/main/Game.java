@@ -91,7 +91,7 @@ public class Game
         }
 
         for (Event event : gameData.getEvents()) {
-            Gdx.app.log("Events", gameData.getEvents().size() + "");
+            // Gdx.app.log("Events", gameData.getEvents().size() + "");
             event.executeEvent();
             gameData.removeEvent(event);
         }

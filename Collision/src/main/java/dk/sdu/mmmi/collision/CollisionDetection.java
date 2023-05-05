@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse;
+package dk.sdu.mmmi.collision;
 
 import com.badlogic.gdx.Gdx;
 import dk.sdu.mmmi.cbse.common.data.Entity;
@@ -10,14 +10,13 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SpritePart;
 import dk.sdu.mmmi.cbse.common.events.CollisionEvent;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 
 
 import java.awt.*;
 
 
-public class CollisionDetection implements IEntityProcessingService{
-    private boolean isCollided = false;
-
+public class CollisionDetection implements IPostEntityProcessingService {
     @Override
     public void process(GameData gameData, World world){
         // TODO find a way to get the entities classes without the for-loop
@@ -41,10 +40,8 @@ public class CollisionDetection implements IEntityProcessingService{
            Finds all players and zombies in entities check if they overlap
         */
         for (Entity entity : world.getEntities()){
-            isCollided = false;
             for (Entity colEntity : world.getEntities()){
-                if (collideWith(entity, colEntity) && !entity.equals(colEntity) && isCollided != true) {
-                    isCollided = true;
+                if (collideWith(entity, colEntity) && !entity.equals(colEntity)) {
                     gameData.addEvent(new CollisionEvent(entity, colEntity));
                     // Gdx.app.log("Collision", entity.getID() + " with " + colEntity.getID());
                 }

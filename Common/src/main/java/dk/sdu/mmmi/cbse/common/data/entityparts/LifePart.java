@@ -25,14 +25,6 @@ public class LifePart implements EntityPart {
         this.life = life;
     }
 
-    public boolean isHit() {
-        return isHit;
-    }
-
-    public void setIsHit(boolean isHit) {
-        this.isHit = isHit;
-    }
-
     public boolean isDead() {
         return dead;
     }
@@ -40,12 +32,12 @@ public class LifePart implements EntityPart {
     @Override
     public void process(GameData gameData, Entity entity) {
         //TODO: If entity is hit minus damage.
-        if (this.isHit) {
-            this.life = - 1;
-            this.isHit = false;
-        }
         if (this.life <= 0) {
             this.dead = true;
         }
+    }
+
+    public void takeDamage(int damage) {
+        this.life -= damage;
     }
 }
