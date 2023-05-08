@@ -9,6 +9,7 @@
         <module name="Player" />
         <module name="Zombie" />
         <module name="InfernoAura" />
+        <module name="MoveToAI" />
         <module name="Collision" />
         <module name="AI" />
         <module name="Map" />

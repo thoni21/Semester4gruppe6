@@ -3,16 +3,14 @@ package ai;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IArtificialIntelligenceService;
-import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 
 public class AiPlugin implements IArtificialIntelligenceService {
 
     @Override
-    public void process(GameData gameData, Entity entity) {
+    public void process(World gameData, GameData data, Entity entity) {
         PositionPart positionPart = entity.getPart(PositionPart.class);
         MovingPart movingPart = entity.getPart(MovingPart.class);
 
@@ -29,8 +27,8 @@ public class AiPlugin implements IArtificialIntelligenceService {
             movingPart.setDown(Math.random() < 0.5);
         }
 
-        movingPart.process(gameData, entity);
-        positionPart.process(gameData, entity);
+        // movingPart.process(gameData, entity);
+        // positionPart.process(gameData, entity);
 
     }
 }

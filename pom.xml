@@ -21,6 +21,7 @@
         <module>Collision</module>
         <module>CommonBullet</module>
         <module>InfernoAura</module>
+        <module>MoveToAI</module>
 
     </modules>
     <properties>

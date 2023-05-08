@@ -44,11 +44,10 @@ public class CollisionEvent extends Event {
 
         }
 
+        // If enemy hits aura - Take damage according to the auras damage.
         if (super.getSource().getType() == EntityTypes.Aura && this.colEntity.getType() == EntityTypes.Enemy) {
             LifePart enemyLifePart = this.colEntity.getPart(LifePart.class);
             DamagePart auraDamagePart = super.getSource().getPart(DamagePart.class);
-
-            Gdx.app.log("test", "Damage from aura");
 
             enemyLifePart.takeDamage(auraDamagePart.getDamage());
         }
