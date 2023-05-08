@@ -13,8 +13,7 @@ public class InfernoAuraProcess implements IEntityProcessingService, BulletSPI {
     @Override
     public void process(GameData gameData, World world) {
         // Find current HellFlameAura instance (only one aura exist at a time, no double damage).
-        for (Entity entity : world.getEntities(InfernoAura.class)) {
-            Entity infernoAura = entity;
+        for (Entity infernoAura : world.getEntities(InfernoAura.class)) {
 
             // Check if bullet is dead.
             LifePart lifePart = infernoAura.getPart(LifePart.class);
