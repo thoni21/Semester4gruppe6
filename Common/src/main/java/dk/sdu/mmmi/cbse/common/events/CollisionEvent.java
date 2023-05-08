@@ -1,11 +1,9 @@
 package dk.sdu.mmmi.cbse.common.events;
 
-import com.badlogic.gdx.Gdx;
 import dk.sdu.mmmi.cbse.common.Types.EntityTypes;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.entityparts.DamagePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 
 public class CollisionEvent extends Event {
@@ -44,11 +42,10 @@ public class CollisionEvent extends Event {
 
         }
 
+        // If enemy hits aura - Take damage according to the auras damage.
         if (super.getSource().getType() == EntityTypes.Aura && this.colEntity.getType() == EntityTypes.Enemy) {
             LifePart enemyLifePart = this.colEntity.getPart(LifePart.class);
             DamagePart auraDamagePart = super.getSource().getPart(DamagePart.class);
-
-            Gdx.app.log("test", "Damage from aura");
 
             enemyLifePart.takeDamage(auraDamagePart.getDamage());
         }

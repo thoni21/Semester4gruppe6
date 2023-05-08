@@ -2,22 +2,18 @@ package dk.sdu.mmmi.cbse.main;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import dk.sdu.mmmi.cbse.common.Types.EntityTypes;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SpritePart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.TimerPart;
 import dk.sdu.mmmi.cbse.common.events.Event;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
-import dk.sdu.mmmi.cbse.common.services.IEventExecuteService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import dk.sdu.mmmi.cbse.managers.GameInputProcessor;
@@ -35,8 +31,6 @@ public class Game
     private SpriteBatch batch;
     private Texture spriteSheetTexture;
     private final GameData gameData = new GameData();
-    private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
-    private List<IPostEntityProcessingService> postEntityProcessors = new ArrayList<>();
     private World world = new World();
 
     @Override
@@ -136,20 +130,8 @@ public class Game
 
         TextureRegion region = new TextureRegion(spriteSheetTexture, spritePart.getSrcStartPosX(), spritePart.getSrcStartPosY(), spritePart.getSrcWidth(), spritePart.getSrcHeight());
 
-        // Check if the current entity is an aura the draw with opacity based on aura expiration.
-        if (entity.getType() == EntityTypes.Aura) {
-            TimerPart auraTimerPart = entity.getPart(TimerPart.class);
-
-            // Calculate the time left in percentage
-            float timeLeftPer = auraTimerPart.getExpiration() / auraTimerPart.getExpirationTotal();
-
-            // Change the alpha (opacity) of the aura
-            batch.setColor(255,255,255, 1 * timeLeftPer);
-
-        } else {
-            // Draw everything else with full opacity
-            batch.setColor(255, 255, 255, 1);
-        }
+        // Set the opacity off current sprite part
+        batch.setColor(255,255,255, spritePart.getOpacity());
 
         batch.draw(region, positionPart.getX(), positionPart.getY());
     }

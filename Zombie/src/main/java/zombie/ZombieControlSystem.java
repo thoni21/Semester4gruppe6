@@ -1,12 +1,16 @@
 package zombie;
 
-import ai.AiPlugin;
-import com.badlogic.gdx.Gdx;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
+import dk.sdu.mmmi.cbse.common.services.IArtificialIntelligenceService;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+
+import java.util.Collection;
+import java.util.ServiceLoader;
+
+import static java.util.stream.Collectors.toList;
 
 public class ZombieControlSystem implements IEntityProcessingService {
     @Override
@@ -19,14 +23,19 @@ public class ZombieControlSystem implements IEntityProcessingService {
                 world.removeEntity(zombie);
             }
 
-            Gdx.app.log("Zombie Life" ,lifePart.getLife() + "");
+            // Gdx.app.log("Zombie Life" ,lifePart.getLife() + "");
 
-            AiPlugin aiPlugin = new AiPlugin();
-            aiPlugin.process(gameData, zombie);
+            // Find the AI
+            // TODO: Can be modified to take a specific AI if we create more - (If AI type = some type enum)
+            for (IArtificialIntelligenceService ai : getArtificialIntelligenceServices()) {
+                ai.process(world, gameData, zombie);
+            }
 
             lifePart.process(gameData, zombie);
         }
+    }
 
-
+    private Collection<? extends IArtificialIntelligenceService> getArtificialIntelligenceServices() {
+        return ServiceLoader.load(IArtificialIntelligenceService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 }

@@ -16,11 +16,12 @@ public class ZombiePlugin implements IGamePluginService {
     }
     private Entity createEnemy(GameData gameData){
         // Sprite attributes.
-        int spriteStartPosX = 32; // Sprite start position X in sprite sheet
+        int spriteStartPosX = 32;  // Sprite start position X in sprite sheet
         int spriteStartPosY = 600; // Sprite start position Y in sprite sheet
-        int spriteWidth = 32;     // Sprite width in sprite sheet
-        int spriteHeight = 44;    // Sprite height in sprite sheet
-        int spriteLayer = 2;     // TODO: maybe convert layers to an enum
+        int spriteWidth = 32;      // Sprite width in sprite sheet
+        int spriteHeight = 44;     // Sprite height in sprite sheet
+        int spriteLayer = 2;       // TODO: maybe convert layers to an enum
+        float opacity = 1;         // Sprite opacity
 
         // Movement attributes.
         float deacceleration = 100;
@@ -39,7 +40,7 @@ public class ZombiePlugin implements IGamePluginService {
         zombie.setType(EntityTypes.Enemy);
         zombie.add(new MovingPart(deacceleration, acceleration, maxSpeed));
         zombie.add(new PositionPart(x, y));
-        zombie.add(new SpritePart(spriteStartPosX, spriteStartPosY, spriteWidth,spriteHeight,spriteHeight, spriteWidth, spriteLayer));
+        zombie.add(new SpritePart(spriteStartPosX, spriteStartPosY, spriteWidth,spriteHeight,spriteHeight, spriteWidth, spriteLayer, opacity));
         zombie.add(new LifePart(health));
         zombie.add(new DamagePart(damage));
         return zombie;

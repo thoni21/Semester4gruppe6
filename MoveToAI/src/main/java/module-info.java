@@ -1,8 +1,7 @@
 import dk.sdu.mmmi.cbse.common.services.IArtificialIntelligenceService;
 
-module AI {
-    exports ai;
+module MoveToAI {
     requires Common;
 
-    provides IArtificialIntelligenceService with ai.AiPlugin;
+    provides IArtificialIntelligenceService with movetoai.MoveToAIProcess;
 }

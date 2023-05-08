@@ -9,6 +9,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/AI/pom.xml" />
         <option value="$PROJECT_DIR$/InfernoAuraBullet/pom.xml" />
       </set>
     </option>

@@ -9,8 +9,8 @@
         <module name="Player" />
         <module name="Zombie" />
         <module name="InfernoAura" />
+        <module name="MoveToAI" />
         <module name="Collision" />
-        <module name="AI" />
         <module name="Map" />
         <module name="Weapon" />
         <module name="HellFlameAura" />
@@ -20,6 +20,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="17">
+      <module name="AI" target="17" />
       <module name="AiRandom" target="17" />
       <module name="CommonAI" target="17" />
       <module name="Enemy" target="17" />
