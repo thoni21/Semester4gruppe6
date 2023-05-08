@@ -43,6 +43,13 @@ public class InfernoAuraProcess implements IEntityProcessingService, BulletSPI {
 
             TimerPart timerPart = infernoAura.getPart(TimerPart.class);
             timerPart.process(gameData, infernoAura);
+
+            // Calculate the time left in percentage
+            float timeLeftPer = timerPart.getExpiration() / timerPart.getExpirationTotal();
+            SpritePart spritePart = infernoAura.getPart(SpritePart.class);
+            // Change the alpha (opacity) of the aura
+            spritePart.setOpacity(1 * timeLeftPer);
+
             lifePart.process(gameData, infernoAura);
 
             break;
@@ -54,18 +61,19 @@ public class InfernoAuraProcess implements IEntityProcessingService, BulletSPI {
         PositionPart weaponPosition = weapon.getPart(PositionPart.class);
 
         // Sprite attributes.
-        int spriteStartPosX = 64; // Sprite start position X in sprite sheet
+        int spriteStartPosX = 64;  // Sprite start position X in sprite sheet
         int spriteStartPosY = 600; // Sprite start position Y in sprite sheet
         int spriteWidth = 176;     // Sprite width in sprite sheet
         int spriteHeight = 176;    // Sprite height in sprite sheet
-        int spriteLayer = 1;      // TODO: maybe convert layers to an enum
+        int spriteLayer = 1;       // TODO: maybe convert layers to an enum
+        float opacity = 1;         // Sprite opacity
 
         Entity infernoAura = new InfernoAura();
         infernoAura.add(new SpritePart(
-            spriteStartPosX, spriteStartPosY, spriteWidth, spriteHeight, spriteWidth, spriteHeight, spriteLayer
-        ));
+            spriteStartPosX, spriteStartPosY, spriteWidth, spriteHeight, spriteWidth, spriteHeight, spriteLayer,
+                opacity));
         infernoAura.add(new PositionPart(weaponPosition.getX(), weaponPosition.getY()));
-        infernoAura.add(new TimerPart(10));
+        infernoAura.add(new TimerPart(2));
         infernoAura.add(new LifePart(1));
         infernoAura.add(new DamagePart(2));
 

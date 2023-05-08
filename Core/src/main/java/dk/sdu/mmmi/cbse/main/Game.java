@@ -136,20 +136,8 @@ public class Game
 
         TextureRegion region = new TextureRegion(spriteSheetTexture, spritePart.getSrcStartPosX(), spritePart.getSrcStartPosY(), spritePart.getSrcWidth(), spritePart.getSrcHeight());
 
-        // Check if the current entity is an aura the draw with opacity based on aura expiration.
-        if (entity.getType() == EntityTypes.Aura) {
-            TimerPart auraTimerPart = entity.getPart(TimerPart.class);
-
-            // Calculate the time left in percentage
-            float timeLeftPer = auraTimerPart.getExpiration() / auraTimerPart.getExpirationTotal();
-
-            // Change the alpha (opacity) of the aura
-            batch.setColor(255,255,255, 1 * timeLeftPer);
-
-        } else {
-            // Draw everything else with full opacity
-            batch.setColor(255, 255, 255, 1);
-        }
+        // Set the opacity off current sprite part
+        batch.setColor(255,255,255, spritePart.getOpacity());
 
         batch.draw(region, positionPart.getX(), positionPart.getY());
     }

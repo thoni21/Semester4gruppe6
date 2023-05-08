@@ -11,9 +11,10 @@ public class SpritePart implements EntityPart {
     private int layer;
     private float sizeWidth;
     private float sizeHeight;
+    private float opacity;
 
 
-    public SpritePart (int srcStartPosX, int srcStartPosY, int srcWidth, int srcHeight,float sizeHeight,float sizeWidth, int layer) {
+    public SpritePart (int srcStartPosX, int srcStartPosY, int srcWidth, int srcHeight, float sizeHeight, float sizeWidth, int layer, float opacity) {
         this.srcStartPosX = srcStartPosX;
         this.srcStartPosY = srcStartPosY;
         this.srcHeight = srcHeight;
@@ -21,6 +22,7 @@ public class SpritePart implements EntityPart {
         this.sizeHeight = sizeHeight;
         this.sizeWidth = sizeWidth;
         this.layer = layer;
+        this.opacity = opacity;
     }
 
     public int getSrcHeight() {
@@ -49,6 +51,12 @@ public class SpritePart implements EntityPart {
 
     public int getLayer() {
         return layer;
+    }
+
+    public float getOpacity() { return opacity; }
+
+    public void setOpacity(float newOpacity) {
+        this.opacity = newOpacity;
     }
 
     @Override
