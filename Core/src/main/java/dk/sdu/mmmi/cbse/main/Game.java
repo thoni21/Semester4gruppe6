@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.cbse.common.Types.EntityTypes;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
@@ -51,7 +52,6 @@ public class Game
         Gdx.input.setInputProcessor(
                 new GameInputProcessor(gameData)
         );
-
 
         // Lookup all Game Plugins using ServiceLoader
         for (IGamePluginService iGamePlugin : getPluginServices()) {
@@ -137,7 +137,9 @@ public class Game
 
         batch.draw(region, positionPart.getX(), positionPart.getY());
 
+        // Update the camera position according to the player position
         if (entity.getType() == EntityTypes.Player) {
+            // Check if the player has hit the border
             cam.position.set(positionPart.getX(), positionPart.getY(), 0);
         }
     }
