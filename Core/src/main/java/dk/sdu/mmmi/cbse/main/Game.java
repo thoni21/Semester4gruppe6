@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import dk.sdu.mmmi.cbse.common.Types.EntityTypes;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -20,7 +21,6 @@ import dk.sdu.mmmi.cbse.managers.GameInputProcessor;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.ServiceLoader;
 import static java.util.stream.Collectors.toList;
 
@@ -54,7 +54,6 @@ public class Game
 
 
         // Lookup all Game Plugins using ServiceLoader
-        System.out.println(getPluginServices().size());
         for (IGamePluginService iGamePlugin : getPluginServices()) {
             iGamePlugin.start(gameData, world);
         }
@@ -69,6 +68,9 @@ public class Game
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameData.setDelta(Gdx.graphics.getDeltaTime());
+
+        batch.setProjectionMatrix(cam.combined);
+        cam.update();
 
         update();
 
@@ -134,6 +136,10 @@ public class Game
         batch.setColor(255,255,255, spritePart.getOpacity());
 
         batch.draw(region, positionPart.getX(), positionPart.getY());
+
+        if (entity.getType() == EntityTypes.Player) {
+            cam.position.set(positionPart.getX(), positionPart.getY(), 0);
+        }
     }
 
     @Override

@@ -23,14 +23,14 @@
     <repositories>
         <repository>
             <id>github</id>
-            <name>GitHub sweat-tek Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/sweat-tek/ShadedLibGDX</url>
+            <name>GitHub Helleberg Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/Helleberg/ShadedLibGDX</url>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>dk.sdu.mmmi.cbse</groupId>
+            <groupId>dk.sdu.helleberg</groupId>
             <artifactId>shadedlibgdx</artifactId>
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
@@ -72,7 +72,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>dk.sdu.mmmi.cbse</groupId>
+                                    <groupId>dk.sdu.helleberg</groupId>
                                     <artifactId>shadedlibgdx</artifactId>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>../libs</outputDirectory>
