@@ -6,8 +6,8 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 public class Main {
 	
 	public static void main(String[] args) {
-		int width = 1000;
-		int height = 600;
+		int width = 1400;
+		int height = 800;
 
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setTitle("CoolGame");

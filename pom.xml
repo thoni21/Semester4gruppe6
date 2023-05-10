@@ -39,7 +39,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>dk.sdu.mmmi.cbse</groupId>
+                <groupId>dk.sdu.helleberg</groupId>
                 <artifactId>shadedlibgdx</artifactId>
                 <version>1.0.1-SNAPSHOT</version>
             </dependency>

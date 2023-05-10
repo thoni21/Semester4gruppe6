@@ -16,7 +16,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>dk.sdu.mmmi.cbse</groupId>
+            <groupId>dk.sdu.helleberg</groupId>
             <artifactId>shadedlibgdx</artifactId>
         </dependency>
         <dependency>

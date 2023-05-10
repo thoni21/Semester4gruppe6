@@ -88,21 +88,26 @@ public class MovingPart
             dy -= acceleration * dt;
         }
 
-        // set position
+        // Update x and y
         x += dx * dt;
+        y += dy * dt;
+
+        // Screen wrap logic:
+        /*
         if (x > gameData.getDisplayWidth()) {
             x = 0;
         } else if (x < 0) {
             x = gameData.getDisplayWidth();
         }
 
-        y += dy * dt;
         if (y > gameData.getDisplayHeight()) {
             y = 0;
         } else if (y < 0) {
             y = gameData.getDisplayHeight();
         }
+         */
 
+        // Set the new x and y coordinates
         positionPart.setX(x);
         positionPart.setY(y);
 
