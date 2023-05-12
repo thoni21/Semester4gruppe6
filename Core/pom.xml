@@ -30,7 +30,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>dk.sdu.helleberg</groupId>
+            <groupId>dk.sdu.group6</groupId>
             <artifactId>shadedlibgdx</artifactId>
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
@@ -72,7 +72,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>dk.sdu.helleberg</groupId>
+                                    <groupId>dk.sdu.group6</groupId>
                                     <artifactId>shadedlibgdx</artifactId>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>../libs</outputDirectory>

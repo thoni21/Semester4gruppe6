@@ -16,7 +16,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>dk.sdu.helleberg</groupId>
+            <groupId>dk.sdu.group6</groupId>
             <artifactId>shadedlibgdx</artifactId>
         </dependency>
         <dependency>

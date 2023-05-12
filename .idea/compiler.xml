@@ -31,7 +31,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Collision" options="" />
       <module name="Common" options="" />
-      <module name="Core" options="" />
+      <module name="Core" options="--add-exports com.badlogic.gdx/com.badlogic.gdx.graphics.g2d=Core" />
     </option>
   </component>
 </project>
