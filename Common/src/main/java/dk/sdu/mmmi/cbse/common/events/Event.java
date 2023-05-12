@@ -11,14 +11,14 @@ import java.io.Serializable;
  */
 public class Event implements Serializable, IEventExecuteService {
 
-    private final Entity source;
-
-    public Event(Entity source) {
-        this.source = source;
-    }
+    private Entity source;
 
     public Entity getSource() {
-        return source;
+        return this.source;
+    }
+
+    public void setSource(Entity source) {
+        this.source = source;
     }
 
     @Override

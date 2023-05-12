@@ -11,6 +11,7 @@
         <module name="InfernoAura" />
         <module name="MoveToAI" />
         <module name="Collision" />
+        <module name="WaveSystem" />
         <module name="Map" />
         <module name="Weapon" />
         <module name="HellFlameAura" />
@@ -31,7 +32,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Collision" options="" />
       <module name="Common" options="" />
-      <module name="Core" options="--add-exports com.badlogic.gdx/com.badlogic.gdx.graphics.g2d=Core" />
+      <module name="Core" options="" />
     </option>
   </component>
 </project>

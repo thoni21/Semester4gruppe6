@@ -8,8 +8,9 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 
 public class CollisionEvent extends Event {
     private Entity colEntity;
+
     public CollisionEvent(Entity sourceEntity, Entity colEntity) {
-        super(sourceEntity);
+        super.setSource(sourceEntity);
         this.colEntity = colEntity;
     }
 
