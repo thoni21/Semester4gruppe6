@@ -1,38 +1,35 @@
+package map;
+
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
-import player.Player;
-import player.PlayerPlugin;
-
+import map.Map;
+import map.MapPlugin;
 import org.junit.jupiter.api.*;
 import static org.mockito.Mockito.*;
 
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class PlayerPluginTest {
+public class MapPluginTest {
     private static GameData mockedGameData;
     private static World mockedWorld;
-    private static PlayerPlugin playerPlugin;
+    private static MapPlugin mapPlugin;
 
     @BeforeAll
     static void setUp() {
         mockedGameData = mock(GameData.class);
         mockedWorld = mock(World.class);
-        playerPlugin = new PlayerPlugin();
+        mapPlugin = new MapPlugin();
     }
 
     @Test
     @Order(1)
     void start(){
-        playerPlugin.start(mockedGameData,mockedWorld);
+        mapPlugin.start(mockedGameData,mockedWorld);
 
-        verify(mockedWorld).addEntity(any(Player.class));
+        verify(mockedWorld).addEntity(any(Map.class));
     }
 
     @Test
     @Order(2)
-    void stop(){
-        playerPlugin.stop(mockedGameData,mockedWorld);
+    void stop(){}
 
-        verify(mockedWorld).removeEntity(any(Player.class));
-    }
 }

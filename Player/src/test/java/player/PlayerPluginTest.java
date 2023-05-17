@@ -1,37 +1,38 @@
+package player;
+
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
-import org.junit.jupiter.api.*;
-import weapon.Weapon;
-import weapon.WeaponPlugin;
 
+import org.junit.jupiter.api.*;
 import static org.mockito.Mockito.*;
 
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class WeaponPluginTest {
+public class PlayerPluginTest {
     private static GameData mockedGameData;
     private static World mockedWorld;
-    private static WeaponPlugin weaponPlugin;
+    private static PlayerPlugin playerPlugin;
 
     @BeforeAll
     static void setUp() {
         mockedGameData = mock(GameData.class);
         mockedWorld = mock(World.class);
-        weaponPlugin = new WeaponPlugin();
+        playerPlugin = new PlayerPlugin();
     }
 
     @Test
     @Order(1)
     void start(){
-        weaponPlugin.start(mockedGameData,mockedWorld);
+        playerPlugin.start(mockedGameData,mockedWorld);
 
-        verify(mockedWorld).addEntity(any(Weapon.class));
+        verify(mockedWorld).addEntity(any(Player.class));
     }
 
     @Test
     @Order(2)
     void stop(){
-        weaponPlugin.stop(mockedGameData,mockedWorld);
+        playerPlugin.stop(mockedGameData,mockedWorld);
 
-        verify(mockedWorld).removeEntity(any(Weapon.class));
+        verify(mockedWorld).removeEntity(any(Player.class));
     }
 }
