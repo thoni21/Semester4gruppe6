@@ -40,7 +40,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>dk.sdu.group6</groupId>
+                <groupId>dk.sdu.mmmi.cbse</groupId>
                 <artifactId>shadedlibgdx</artifactId>
                 <version>1.0.1-SNAPSHOT</version>
             </dependency>
