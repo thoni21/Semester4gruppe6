@@ -51,4 +51,8 @@ public class CollisionEvent extends Event {
             enemyLifePart.takeDamage(auraDamagePart.getDamage());
         }
     }
+
+    public Entity getColEntity() {
+        return colEntity;
+    }
 }
