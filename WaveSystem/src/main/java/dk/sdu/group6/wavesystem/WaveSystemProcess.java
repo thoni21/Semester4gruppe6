@@ -4,28 +4,35 @@ import dk.sdu.mmmi.cbse.common.Types.EntityTypes;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.events.CollisionEvent;
+import dk.sdu.mmmi.cbse.common.events.SpawnEvent;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.ServiceLoader;
 
 import static java.util.stream.Collectors.toList;
 
 public class WaveSystemProcess implements IPostEntityProcessingService {
-    private int waveCount = 1;
-    private float waveLength = 20;
+    private List<Entity> enemies = new ArrayList<>();
+    private Entity player;
     @Override
     public void process(GameData gameData, World world) {
-        int enemyCount = 0;
-
+        // Get enemies
         for (Entity entity : world.getEntities()) {
             if (entity.getType() == EntityTypes.Enemy) {
-                enemyCount ++;
+                enemies.add(entity);
+            }
+            if (entity.getType() == EntityTypes.Player) {
+                this.player = entity;
             }
         }
 
-        if (enemyCount > 0) {
+        if (enemies.size() <= 0 && player != null) {
             // TODO: create spawn event
+            gameData.addEvent(new SpawnEvent(this.player, 5));
         }
     }
 
