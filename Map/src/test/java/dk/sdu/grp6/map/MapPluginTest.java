@@ -20,7 +20,7 @@ public class MapPluginTest {
 
     @Test
     @Order(1)
-    void start(){
+    void start() {
         mapPlugin.start(mockedGameData,mockedWorld);
 
         verify(mockedWorld).addEntity(any(Map.class));
@@ -28,6 +28,10 @@ public class MapPluginTest {
 
     @Test
     @Order(2)
-    void stop(){}
+    void stop() {
+        mapPlugin.stop(mockedGameData,mockedWorld);
+
+        verify(mockedWorld).removeEntity(any(Map.class));
+    }
 
 }
