@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>dk.sdu.mmmi.cbse</groupId>
-    <artifactId>asteroids.jpms</artifactId>
+    <groupId>dk.sdu.grp6</groupId>
+    <artifactId>wave-survival-game</artifactId>
     <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>AsteroidsJPMS</name>
+    <name>WaveSurvivalGame</name>
     <repositories>
     </repositories>
 
