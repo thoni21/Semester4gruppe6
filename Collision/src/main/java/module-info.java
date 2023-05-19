@@ -1,6 +1,5 @@
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
-import dk.sdu.mmmi.collision.CollisionDetection;
-import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.grp6.collision.CollisionDetection;
 
 
 module Collision {
