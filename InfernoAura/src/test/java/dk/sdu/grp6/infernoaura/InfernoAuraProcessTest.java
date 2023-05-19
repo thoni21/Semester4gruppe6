@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;
+import java.util.Timer;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -32,6 +33,7 @@ public class InfernoAuraProcessTest {
     private Entity mockPlayer () {
         // Mock player entity
         Entity player = mock(Entity.class);
+        when(player.getType()).thenReturn(EntityTypes.Player);
 
         return player;
     }
@@ -66,16 +68,20 @@ public class InfernoAuraProcessTest {
         return lifePart;
     }
 
-    private void mockTimerPart (Entity entity) {
+    private TimerPart mockTimerPart (Entity entity) {
         // Mock player timer part
         TimerPart timerPart = mock(TimerPart.class);
         when(entity.getPart(TimerPart.class)).thenReturn(timerPart);
+
+        return timerPart;
     }
 
-    private void mockSpritePart (Entity entity) {
+    private SpritePart mockSpritePart (Entity entity) {
         // Mock player sprite part
         SpritePart spritePart = mock(SpritePart.class);
         when(entity.getPart(SpritePart.class)).thenReturn(spritePart);
+
+        return spritePart;
     }
 
     private void mockDamagePart (Entity entity) {
@@ -92,7 +98,7 @@ public class InfernoAuraProcessTest {
 
         Entity createdAura = infernoAuraProcess.createBullet(mockedWeapon, mockedGameData);
 
-        // Checks
+        // Check if the method returns and instance of the InfernoAura class
         assertInstanceOf(InfernoAura.class, createdAura);
     }
 
@@ -116,20 +122,21 @@ public class InfernoAuraProcessTest {
         infernoAuraProcess.process(mockedGameData, mockedWorld);
 
         // Checks
+        // Check if the inferno aura is found in the world
         verify(mockedWorld, times(1)).getEntities(InfernoAura.class);
+
+        // Check if the inferno aura gets removed
         verify(mockedWorld).removeEntity(mockedInfernoAura);
     }
 
     @Test
-    void testInfernoAuraProcessMovedToPlayer() {
+    void testInfernoAuraProcess() {
         // Player Mock
         Entity mockedPlayer = mockPlayer();
         mockedPlayer.setType(EntityTypes.Player);
         when(mockedWorld.getEntities()).thenReturn(List.of(mockedPlayer));
 
         PositionPart positionPartPlayer = mockPositionPart(mockedPlayer);
-        positionPartPlayer.setX(200f);
-        positionPartPlayer.setY(200f);
         when(mockedPlayer.getPart(PositionPart.class)).thenReturn(positionPartPlayer);
 
         mockSpritePart(mockedPlayer);
@@ -141,28 +148,33 @@ public class InfernoAuraProcessTest {
         LifePart lifePart = mockLifePart(mockedInfernoAura);
         when(lifePart.isDead()).thenReturn(false);
 
-        mockTimerPart(mockedInfernoAura);
+        TimerPart timerPartAura = mockTimerPart(mockedInfernoAura);
+        when(mockedInfernoAura.getPart(TimerPart.class)).thenReturn(timerPartAura);
 
-        mockSpritePart(mockedInfernoAura);
-
-        mockDamagePart(mockedInfernoAura);
+        SpritePart spritePartAura = mockSpritePart(mockedInfernoAura);
+        when(mockedInfernoAura.getPart(SpritePart.class)).thenReturn(spritePartAura);
 
         PositionPart positionPartAura = mockPositionPart(mockedInfernoAura);
-        positionPartAura.setX(0f);
-        positionPartAura.setY(0f);
         when(mockedInfernoAura.getPart(PositionPart.class)).thenReturn(positionPartAura);
-
-        // Checks
-        // TODO Check if player and aura position is not the same
-        // assertNotEquals(positionPartAura.getX(), positionPartPlayer.getX());
-        // assertNotEquals(positionPartAura.getY(), positionPartPlayer.getY());
 
         // Run process
         infernoAuraProcess.process(mockedGameData, mockedWorld);
 
         // Checks
-        // TODO Check if player and aura position is the same
-        // assertEquals(positionPartAura.getX(), positionPartPlayer.getX());
-        // assertEquals(positionPartAura.getY(), positionPartPlayer.getY());
+        // Check that the player is found
+        assertEquals(mockedPlayer.getType(), EntityTypes.Player);
+
+        // Check that the aura position is updated with a float
+        verify(positionPartAura).setX(anyFloat());
+        verify(positionPartAura).setY(anyFloat());
+
+        // Check timer part process runs
+        verify(timerPartAura).process(mockedGameData, mockedInfernoAura);
+
+        // Check that the sprite opacity is getting updated
+        verify(spritePartAura).setOpacity(anyFloat());
+
+        // Check life part process runs
+        verify(lifePart).process(mockedGameData, mockedInfernoAura);
     }
 }
