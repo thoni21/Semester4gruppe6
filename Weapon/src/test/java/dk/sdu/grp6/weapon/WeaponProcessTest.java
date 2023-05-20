@@ -5,6 +5,7 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
+import dk.sdu.mmmi.commonbullet.Bullet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -71,14 +72,14 @@ public class WeaponProcessTest {
     }
 
     @Test
-    void testInfernoAuraProcess() {
+    void testInfernoAuraProcessWeaponToPlayer() {
         // Player Mock
         Entity mockedPlayer = mockPlayer();
         mockedPlayer.setType(EntityTypes.Player);
         when(mockedWorld.getEntities()).thenReturn(List.of(mockedPlayer));
 
         LifePart lifePartPlayer = mockLifePart(mockedPlayer);
-        when(lifePartPlayer.isDead()).thenReturn(false);
+        when(mockedPlayer.getPart(LifePart.class)).thenReturn(lifePartPlayer);
 
         PositionPart positionPartPlayer = mockPositionPart(mockedPlayer);
         when(mockedPlayer.getPart(PositionPart.class)).thenReturn(positionPartPlayer);
@@ -106,6 +107,4 @@ public class WeaponProcessTest {
         verify(positionPartWeapon).setX(anyFloat());
         verify(positionPartWeapon).setY(anyFloat());
     }
-
-    // TODO added test for spawning bullet/aura
 }
