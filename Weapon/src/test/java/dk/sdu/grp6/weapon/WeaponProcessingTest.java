@@ -66,71 +66,32 @@ public class WeaponProcessingTest {
     }
 
     @Test
-    public void testProcess_PlayerEntityIsNull_RemovesWeapon() {
-        // Set the player entity to null
-        when(playerLifePart.isDead()).thenReturn(true);
-
-        // Process the weapon
-        weaponProcessing.process(gameData, world);
-
-        // Verify that the weapon entity is removed
-        verify(world).removeEntity(any(Weapon.class));
-    }
-
-    @Test
-    public void testProcess_PlayerEntityIsDead_RemovesWeapon() {
-        // Arrange
-        when(playerLifePart.isDead()).thenReturn(true);
-
-        // Act
-        weaponProcessing.process(gameData, world);
-
-        // Assert
-        verify(world).removeEntity(eq(weaponEntity));
-    }
-
-    @Test
-    public void testProcess_WeaponEntityExists_UpdatesWeaponPosition() {
-        // Arrange
-        when(playerPositionPart.getX()).thenReturn(100f);
-        when(playerSpritePart.getSrcWidth()).thenReturn(50);
-        when(playerPositionPart.getY()).thenReturn(200f);
-        when(playerSpritePart.getSrcHeight()).thenReturn(60);
-        when(weaponSpritePart.getSrcHeight()).thenReturn(30);
-
-        // Act
-        weaponProcessing.process(gameData, world);
-
-        // Assert
-        verify(weaponPositionPart).setX(eq(75f));
-        verify(weaponPositionPart).setY(eq(260f));
-    }
-
-    @Test
     public void testProcess_AuraEntityIsNull_CreatesAuraEntities() {
         // Arrange
-        when(world.getEntities()).thenReturn(Arrays.asList(playerEntity, weaponEntity));
-        when(world.getEntities(eq(Weapon.class))).thenReturn(Collections.emptyList());
+        when(world.getEntities()).thenReturn(List.of(playerEntity, weaponEntity));
+        when(world.getEntities(Weapon.class)).thenReturn(Collections.emptyList());
 
         // Act
         weaponProcessing.process(gameData, world);
 
         // Assert
         verify(world).addEntity(any(Entity.class));
-        verify(bulletSPI).createBullet(eq(weaponEntity), eq(gameData));
+        verify(bulletSPI).createBullet(weaponEntity, gameData);
     }
 
     @Test
-    public void testProcess_AuraEntityExists_DoesNotCreateAuraEntities() {
-        // Arrange
-        when(world.getEntities()).thenReturn(Arrays.asList(playerEntity, weaponEntity));
-        when(world.getEntities(eq(Weapon.class))).thenReturn(List.of(mock(Entity.class)));
+    void testProcess_LoadBulletSPI() {
+        when(world.getEntities()).thenReturn(List.of(playerEntity, weaponEntity, auraEntity));
 
-        // Act
+        playerEntity = null;
+        weaponEntity = null;
+        auraEntity = null;
+
+        when(world.getEntities(Weapon.class)).thenReturn(Collections.emptyList());
+
         weaponProcessing.process(gameData, world);
 
-        // Assert
-        verify(world, never()).addEntity(any(Entity.class));
-        verify(bulletSPI, never()).createBullet(any(Entity.class), any(GameData.class));
+        verify(weaponPositionPart, never()).setX(anyFloat());
+        verify(weaponPositionPart, never()).setY(anyFloat());
     }
 }

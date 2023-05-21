@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 
 public class WeaponProcessing implements IEntityProcessingService {
     private Entity playerEntity;
-    LifePart playerLifePart;
-    PositionPart playerPositionPart;
-    SpritePart playerSpritePart;
+    private LifePart playerLifePart;
+    private PositionPart playerPositionPart;
+    private SpritePart playerSpritePart;
     Collection<BulletSPI> bulletSPIs;
 
     @Override
