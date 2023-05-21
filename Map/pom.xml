@@ -12,7 +12,7 @@
     <artifactId>Map</artifactId>
     <dependencies>
         <dependency>
-            <groupId>dk.sdu.mmmi.cbse</groupId>
+            <groupId>dk.sdu.grp6</groupId>
             <artifactId>Common</artifactId>
             <version>1.0.1-SNAPSHOT</version>
             <scope>compile</scope>
