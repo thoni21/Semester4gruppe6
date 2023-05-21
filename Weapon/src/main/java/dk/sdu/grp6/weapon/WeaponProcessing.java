@@ -11,68 +11,91 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.commonbullet.BulletSPI;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.ServiceLoader;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 public class WeaponProcessing implements IEntityProcessingService {
+    private Entity playerEntity;
+    LifePart playerLifePart;
+    PositionPart playerPositionPart;
+    SpritePart playerSpritePart;
+    Collection<BulletSPI> bulletSPIs;
+
     @Override
     public void process(GameData gameData, World world) {
-
-        // Loop the world entities to find the weapon
-        Entity weaponEntity = null;
-        for (Entity weapon : world.getEntities(Weapon.class)) {
-            weaponEntity = weapon;
-
-            // Loop the world entities to find the player
-            for (Entity entity : world.getEntities()) {
-                if (entity.getType() == EntityTypes.Player) {
-                    Entity player = entity;
-
-                    // Check if player is alive. If not remove weapon from world
-                    LifePart playerLifePart = player.getPart(LifePart.class);
-                    if (playerLifePart.isDead()) {
-                        world.removeEntity(weaponEntity);
-                    }
-
-                    // Get Position parts
-                    PositionPart playerPositionPart = player.getPart(PositionPart.class);
-                    PositionPart weaponPositionPart = weapon.getPart(PositionPart.class);
-
-                    // Get Sprite parts.
-                    SpritePart playerSpritePart = player.getPart(SpritePart.class);
-                    SpritePart weaponSpritePart = weapon.getPart(SpritePart.class);
-
-                    // Calculate the position of the aura according to the player.
-                    weaponPositionPart.setX(playerPositionPart.getX() -
-                            playerSpritePart.getSrcWidth() / 2f);
-                    weaponPositionPart.setY(playerPositionPart.getY() +
-                            playerSpritePart.getSrcHeight() / 2f + weaponSpritePart.getSrcHeight() / 2f);
-
-                    break;
-                }
-            }
-            break;
-        }
-
-        // Get the aura(bullet) if it exists
-        Entity aura = null;
-        for (Entity entity : world.getEntities()) {
-            if (entity.getType() == EntityTypes.Aura) {
-                aura = entity;
-                break;
+        if (playerEntity == null) {
+            playerEntity = getPlayerEntity(world);
+            if (playerEntity != null) {
+                playerLifePart = playerEntity.getPart(LifePart.class);
+                playerPositionPart = playerEntity.getPart(PositionPart.class);
+                playerSpritePart = playerEntity.getPart(SpritePart.class);
             }
         }
 
-        // If the doesn't exist aura(bullet) and weapon exists - Spawn the aura
-        if (aura == null && weaponEntity != null) {
-            for (BulletSPI bullet : getBulletSPIs()) {
-                world.addEntity(bullet.createBullet(weaponEntity, gameData));
-            }
+        if (playerEntity == null || playerLifePart.isDead()) {
+            removeWeapon(world);
+            return;
+        }
+
+        Entity weaponEntity = getWeaponEntity(world);
+        if (weaponEntity != null) {
+            updateWeaponPosition(weaponEntity);
+        }
+
+        Entity auraEntity = getAuraEntity(world);
+        if (auraEntity == null && weaponEntity != null) {
+            createAuraEntities(gameData, world, weaponEntity);
         }
     }
 
-    private Collection<? extends BulletSPI> getBulletSPIs() {
-        return ServiceLoader.load(BulletSPI.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    Entity getPlayerEntity(World world) {
+        return world.getEntities().stream()
+                .filter(entity -> entity.getType() == EntityTypes.Player)
+                .findFirst()
+                .orElse(null);
+    }
+
+    Entity getWeaponEntity(World world) {
+        return world.getEntities().stream()
+                .filter(entity -> entity instanceof Weapon)
+                .findFirst()
+                .orElse(null);
+    }
+
+    void updateWeaponPosition(Entity weaponEntity) {
+        PositionPart weaponPositionPart = weaponEntity.getPart(PositionPart.class);
+        SpritePart weaponSpritePart = weaponEntity.getPart(SpritePart.class);
+        weaponPositionPart.setX(playerPositionPart.getX() - playerSpritePart.getSrcWidth() / 2f);
+        weaponPositionPart.setY(playerPositionPart.getY() + playerSpritePart.getSrcHeight() / 2f + weaponSpritePart.getSrcHeight() / 2f);
+    }
+
+    Entity getAuraEntity(World world) {
+        return world.getEntities().stream()
+                .filter(entity -> entity.getType() == EntityTypes.Aura)
+                .findFirst()
+                .orElse(null);
+    }
+
+    void removeWeapon(World world) {
+        Optional<Entity> weaponEntity = world.getEntities(Weapon.class).stream().findFirst();
+        weaponEntity.ifPresent(world::removeEntity);
+    }
+
+    void createAuraEntities(GameData gameData, World world, Entity weaponEntity) {
+        if (bulletSPIs == null) {
+            bulletSPIs = loadBulletSPIs();
+        }
+
+        for (BulletSPI bullet : bulletSPIs) {
+            world.addEntity(bullet.createBullet(weaponEntity, gameData));
+        }
+    }
+
+    Collection<BulletSPI> loadBulletSPIs() {
+        return ServiceLoader.load(BulletSPI.class)
+                .stream()
+                .map(ServiceLoader.Provider::get)
+                .collect(Collectors.toList());
     }
 }
