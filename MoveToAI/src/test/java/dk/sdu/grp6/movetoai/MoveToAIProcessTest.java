@@ -66,7 +66,7 @@ public class MoveToAIProcessTest {
         when(world.getEntities()).thenReturn(List.of(player));
         when(player.getType()).thenReturn(EntityTypes.Player);
 
-        // Set up player position to be on the left of the AI entity
+        // Set up player position to be on the right of the AI entity
         when(entityWithAIPosPart.getX()).thenReturn(5.0f);
         when(playerPos.getX()).thenReturn(10.0f);
 
@@ -86,7 +86,7 @@ public class MoveToAIProcessTest {
         when(world.getEntities()).thenReturn(List.of(player));
         when(player.getType()).thenReturn(EntityTypes.Player);
 
-        // Set up player position to be on the left of the AI entity
+        // Set up player position to be on the up of the AI entity
         when(entityWithAIPosPart.getY()).thenReturn(5.0f);
         when(playerPos.getY()).thenReturn(10.0f);
 
@@ -106,7 +106,7 @@ public class MoveToAIProcessTest {
         when(world.getEntities()).thenReturn(List.of(player));
         when(player.getType()).thenReturn(EntityTypes.Player);
 
-        // Set up player position to be on the left of the AI entity
+        // Set up player position to be on the down of the AI entity
         when(entityWithAIPosPart.getY()).thenReturn(10.0f);
         when(playerPos.getY()).thenReturn(5.0f);
 
