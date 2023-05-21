@@ -35,7 +35,7 @@ public class ZombieControlSystem implements IEntityProcessingService {
         }
     }
 
-    private Collection<? extends IArtificialIntelligenceService> getArtificialIntelligenceServices() {
+    Collection<? extends IArtificialIntelligenceService> getArtificialIntelligenceServices() {
         return ServiceLoader.load(IArtificialIntelligenceService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 }
