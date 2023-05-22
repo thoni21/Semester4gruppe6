@@ -7,13 +7,11 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SpritePart;
-import dk.sdu.mmmi.cbse.common.services.IArtificialIntelligenceService;
 import dk.sdu.mmmi.commonbullet.BulletSPI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -62,14 +60,13 @@ public class WeaponProcessingTest {
 
     @Test
     void testProcess_PlayerEntityNull() {
-        // Arrange
         weaponProcessing = spy(new WeaponProcessing());
         when(weaponProcessing.getPlayerEntity(world)).thenReturn(null);
 
-        // Act
+        // Run process
         weaponProcessing.process(gameData, world);
 
-        // Assert
+        // Check
         verify(weaponProcessing, times(1)).removeWeapon(world);
         verify(weaponProcessing, never()).getWeaponEntity(world);
         verify(weaponProcessing, never()).updateWeaponPosition(any(Entity.class));
@@ -79,16 +76,15 @@ public class WeaponProcessingTest {
 
     @Test
     void testProcess_PlayerEntityNotNull_PlayerDead() {
-        // Arrange
         weaponProcessing = spy(new WeaponProcessing());
         when(weaponProcessing.getPlayerEntity(world)).thenReturn(playerEntity);
         when(playerEntity.getPart(LifePart.class)).thenReturn(playerLifePart);
         when(playerLifePart.isDead()).thenReturn(true);
 
-        // Act
+        // Run process
         weaponProcessing.process(gameData, world);
 
-        // Assert
+        // Check
         verify(weaponProcessing).removeWeapon(world);
         verify(weaponProcessing, never()).getWeaponEntity(world);
         verify(weaponProcessing, never()).updateWeaponPosition(any(Entity.class));
@@ -98,17 +94,16 @@ public class WeaponProcessingTest {
 
     @Test
     void testProcess_PlayerEntityNotNull_PlayerAlive_WeaponEntityNull() {
-        // Arrange
         weaponProcessing = spy(new WeaponProcessing());
         when(weaponProcessing.getPlayerEntity(world)).thenReturn(playerEntity);
         when(playerEntity.getPart(LifePart.class)).thenReturn(playerLifePart);
         when(playerLifePart.isDead()).thenReturn(false);
         when(weaponProcessing.getWeaponEntity(world)).thenReturn(null);
 
-        // Act
+        // Run process
         weaponProcessing.process(gameData, world);
 
-        // Assert
+        // Check
         verify(weaponProcessing, never()).removeWeapon(world);
         verify(weaponProcessing).getWeaponEntity(world);
         verify(weaponProcessing, never()).updateWeaponPosition(any(Entity.class));
@@ -118,7 +113,6 @@ public class WeaponProcessingTest {
 
     @Test
     void testProcess_PlayerEntityNotNull_PlayerAlive_WeaponEntityNotNull_AuraEntityNotNull() {
-        // Arrange
         weaponProcessing = spy(new WeaponProcessing());
         when(weaponProcessing.getPlayerEntity(world)).thenReturn(playerEntity);
         when(playerEntity.getPart(LifePart.class)).thenReturn(playerLifePart);
@@ -126,10 +120,10 @@ public class WeaponProcessingTest {
         when(weaponProcessing.getWeaponEntity(world)).thenReturn(weaponEntity);
         when(weaponProcessing.getAuraEntity(world)).thenReturn(auraEntity);
 
-        // Act
+        // Run process
         weaponProcessing.process(gameData, world);
 
-        // Assert
+        // Check
         verify(weaponProcessing, never()).removeWeapon(world);
         verify(weaponProcessing).getWeaponEntity(world);
         verify(weaponProcessing).updateWeaponPosition(weaponEntity);
@@ -139,7 +133,6 @@ public class WeaponProcessingTest {
 
     @Test
     void testProcess_PlayerEntityNotNull_PlayerAlive_WeaponEntityNotNull_AuraEntityNull() {
-        // Arrange
         weaponProcessing = spy(new WeaponProcessing());
         when(weaponProcessing.getPlayerEntity(world)).thenReturn(playerEntity);
         when(playerEntity.getPart(LifePart.class)).thenReturn(playerLifePart);
@@ -147,10 +140,10 @@ public class WeaponProcessingTest {
         when(weaponProcessing.getWeaponEntity(world)).thenReturn(weaponEntity);
         when(weaponProcessing.getAuraEntity(world)).thenReturn(null);
 
-        // Act
+        // Run process
         weaponProcessing.process(gameData, world);
 
-        // Assert
+        // Check
         verify(weaponProcessing, never()).removeWeapon(world);
         verify(weaponProcessing).getWeaponEntity(world);
         verify(weaponProcessing).updateWeaponPosition(weaponEntity);
