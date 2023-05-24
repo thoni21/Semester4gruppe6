@@ -5,6 +5,9 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 
+/**
+ * @author Group 6
+ */
 public class InfernoAuraPlugin implements IGamePluginService {
     @Override
     public void start(GameData gameData, World world) {

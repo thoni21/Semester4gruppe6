@@ -8,6 +8,9 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.SpritePart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
+/**
+ * @author Group 6
+ */
 public class MapProcessing implements IEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {

@@ -6,6 +6,9 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.DamagePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 
+/**
+ * @author Group 6
+ */
 public class CollisionEvent extends Event {
     private Entity colEntity;
 

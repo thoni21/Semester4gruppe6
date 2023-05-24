@@ -7,6 +7,10 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author Jan Corfixen
+ * <a href="https://github.com/sweat-tek/AsteroidsJPMS/tree/lwjgl3">Repo</a>
+ */
 public class Entity implements Serializable {
 
     private final UUID ID = UUID.randomUUID();

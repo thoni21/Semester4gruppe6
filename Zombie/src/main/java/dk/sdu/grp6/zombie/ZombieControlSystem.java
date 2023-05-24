@@ -12,6 +12,9 @@ import java.util.ServiceLoader;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * @author Group 6
+ */
 public class ZombieControlSystem implements IEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {

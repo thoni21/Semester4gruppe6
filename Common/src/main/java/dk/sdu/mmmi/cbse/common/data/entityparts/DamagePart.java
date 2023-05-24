@@ -3,6 +3,9 @@ package dk.sdu.mmmi.cbse.common.data.entityparts;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 
+/**
+ * @author Group 6
+ */
 public class DamagePart implements EntityPart {
     private int damage;
 

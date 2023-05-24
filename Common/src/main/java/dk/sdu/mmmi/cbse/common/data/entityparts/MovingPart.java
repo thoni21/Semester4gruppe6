@@ -11,8 +11,8 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import static java.lang.Math.*;
 
 /**
- *
  * @author Alexander
+ * <a href="https://github.com/sweat-tek/AsteroidsJPMS/tree/lwjgl3">Repo</a>
  */
 public class MovingPart
         implements EntityPart {

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import dk.sdu.mmmi.cbse.common.Types.EntityTypes;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -24,6 +23,10 @@ import java.util.Collection;
 import java.util.ServiceLoader;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * @author Jan Corfixen
+ * <a href="https://github.com/sweat-tek/AsteroidsJPMS/tree/lwjgl3">Repo</a>
+ */
 public class Game
         implements ApplicationListener {
 
@@ -43,9 +46,10 @@ public class Game
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
 
+        // SpriteBatch - created by group 6
         batch = new SpriteBatch();
 
-        // Load Sprite Sheet
+        // Load Sprite Sheet - created by group 6
         this.spriteSheetTexture = new Texture("assets/spritesheet.png");
 
         Gdx.input.setInputProcessor(
@@ -88,6 +92,7 @@ public class Game
             postEntityProcessorService.process(gameData, world);
         }
 
+        // Event for loop - created by Group 6
         for (Event event : gameData.getEvents()) {
             // Gdx.app.log("Events", gameData.getEvents().size() + "");
             event.executeEvent();
@@ -95,6 +100,7 @@ public class Game
         }
     }
 
+    // Draw method - created by Group 6
     private void draw() {
         ArrayList<Entity> layer0 = new ArrayList<>();
         ArrayList<Entity> layer1 = new ArrayList<>();
@@ -125,6 +131,7 @@ public class Game
         batch.end();
     }
 
+    // drawEntity method - created by Group 6
     private void drawEntity(Entity entity) {
         SpritePart spritePart = entity.getPart(SpritePart.class);
         PositionPart positionPart = entity.getPart(PositionPart.class);

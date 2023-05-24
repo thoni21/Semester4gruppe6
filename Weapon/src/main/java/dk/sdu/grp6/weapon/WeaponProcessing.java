@@ -15,6 +15,9 @@ import java.util.Optional;
 import java.util.ServiceLoader;
 import java.util.stream.Collectors;
 
+/**
+ * @author Group 6
+ */
 public class WeaponProcessing implements IEntityProcessingService {
     Entity playerEntity;
     LifePart playerLifePart;

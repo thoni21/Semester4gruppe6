@@ -7,6 +7,9 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 
+/**
+ * @author Group 6
+ */
 public class ZombiePlugin implements IGamePluginService {
     private Entity zombie;
     @Override

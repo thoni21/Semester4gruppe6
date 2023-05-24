@@ -8,6 +8,9 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.commonbullet.BulletSPI;
 
+/**
+ * @author Group 6
+ */
 public class InfernoAuraProcess implements IEntityProcessingService, BulletSPI {
 
     @Override

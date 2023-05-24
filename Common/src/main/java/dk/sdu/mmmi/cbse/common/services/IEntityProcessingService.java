@@ -8,10 +8,9 @@ public interface IEntityProcessingService {
     /**
      *
      * @author Jan Corfixen
-     *
+     * <a href="https://github.com/sweat-tek/AsteroidsJPMS/tree/lwjgl3">Repo</a>
      * @param gameData
      * @param world
-     * @throws
      */
     void process(GameData gameData, World world);
 }

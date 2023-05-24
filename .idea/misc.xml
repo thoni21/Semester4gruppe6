@@ -10,8 +10,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/AI/pom.xml" />
-        <option value="$PROJECT_DIR$/InfernoAuraBullet/pom.xml" />
+        <option value="$PROJECT_DIR$/WaveSystem/pom.xml" />
       </set>
     </option>
   </component>

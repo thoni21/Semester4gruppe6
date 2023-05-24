@@ -11,7 +11,9 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.*;
 
-
+/**
+ * @author Group 6
+ */
 public class PlayerMovement implements IEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {

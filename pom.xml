@@ -22,7 +22,6 @@
         <module>CommonBullet</module>
         <module>InfernoAura</module>
         <module>MoveToAI</module>
-        <module>WaveSystem</module>
 
     </modules>
     <properties>

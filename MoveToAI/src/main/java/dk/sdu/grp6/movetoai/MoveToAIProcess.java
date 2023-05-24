@@ -8,6 +8,9 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IArtificialIntelligenceService;
 
+/**
+ * @author Group 6
+ */
 public class MoveToAIProcess implements IArtificialIntelligenceService {
     @Override
     public void process(World world, GameData gameData, Entity entityWithAI) {

@@ -6,8 +6,8 @@ import dk.sdu.mmmi.cbse.common.services.IEventExecuteService;
 import java.io.Serializable;
 
 /**
- *
  * @author Mads
+ * <a href="https://github.com/sweat-tek/AsteroidsJPMS/tree/lwjgl3">Repo</a>
  */
 public class Event implements Serializable, IEventExecuteService {
 

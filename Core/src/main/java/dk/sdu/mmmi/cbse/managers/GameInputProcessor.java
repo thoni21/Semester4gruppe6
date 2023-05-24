@@ -5,6 +5,10 @@ import com.badlogic.gdx.InputAdapter;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 
+/**
+ * @author Jan Corfixen
+ * <a href="https://github.com/sweat-tek/AsteroidsJPMS/tree/lwjgl3">Repo</a>
+ */
 public class GameInputProcessor extends InputAdapter {
 
     private final GameData gameData;
